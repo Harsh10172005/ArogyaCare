@@ -1,7 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Heart } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -23,15 +22,8 @@ export default function Hero() {
             </Button>
           </div>
         </div>
-        <div className="flex justify-center">
-            <Image 
-                src="https://picsum.photos/600/400" 
-                alt="Doctor consulting a patient"
-                width={600}
-                height={400}
-                className="rounded-xl shadow-2xl"
-                data-ai-hint="doctor patient"
-            />
+        <div className="flex justify-center items-center h-full">
+            <Heart className="w-48 h-48 md:w-64 md:h-64 text-primary animate-beat" fill="currentColor" />
         </div>
       </div>
     </section>
