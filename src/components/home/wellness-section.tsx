@@ -19,8 +19,8 @@ const wellnessData = {
     healthyHabits: {
         title: "Building Healthy Habits",
         description: "Small, consistent changes can lead to significant health improvements. We focus on key habits like regular exercise, adequate sleep, stress management, and hydration to help you build a sustainable, healthy lifestyle for the long term.",
-        image: "https://picsum.photos/500/300?random=3",
-        hint: "person jogging"
+        image: "https://picsum.photos/500/301",
+        hint: "beating heart"
     }
 }
 
@@ -71,7 +71,7 @@ function WellnessContent({ title, description, image, hint }: { title: string, d
                         src={image} 
                         alt={title}
                         width={500}
-                        height={300}
+                        height={301}
                         className="w-full h-full object-cover"
                         data-ai-hint={hint}
                     />
