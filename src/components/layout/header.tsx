@@ -41,8 +41,8 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-6">
-          <Link href="/" className="flex items-center gap-2">
-            <Image src="/logo.svg" alt="ArogyaCare Logo" width={140} height={32} />
+          <Link href="/" className="flex items-center gap-2 text-xl font-bold text-primary">
+            ArogyaCare
           </Link>
 
           <nav className="hidden md:flex items-center gap-4">
@@ -88,11 +88,11 @@ export default function Header() {
               <span className="sr-only">Open menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="left">
+          <SheetContent side="left" className="w-full max-w-sm">
             <div className="flex flex-col h-full">
               <div className="flex items-center justify-between p-4 border-b">
-                 <Link href="/" onClick={() => setSheetOpen(false)}>
-                    <Image src="/logo.svg" alt="ArogyaCare Logo" width={140} height={32} />
+                 <Link href="/" onClick={() => setSheetOpen(false)} className="flex items-center gap-2 text-xl font-bold text-primary">
+                    ArogyaCare
                  </Link>
                  <SheetClose asChild>
                   <Button variant="ghost" size="icon">

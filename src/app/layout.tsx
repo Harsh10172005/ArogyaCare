@@ -24,7 +24,7 @@ export default function RootLayout({
       </head>
       <body className={cn("font-body antialiased", "min-h-screen bg-background font-sans")}>
         <Header />
-        <div className="flex-grow">
+        <div className="flex-grow px-4 md:px-6">
           {children}
         </div>
         <Footer />

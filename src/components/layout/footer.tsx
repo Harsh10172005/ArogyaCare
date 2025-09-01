@@ -7,8 +7,8 @@ export default function Footer() {
       <div className="container py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <Link href="/" className="mb-4 inline-block">
-                <Image src="/logo.svg" alt="ArogyaCare Logo" width={140} height={32} />
+            <Link href="/" className="mb-4 inline-block text-xl font-bold text-primary">
+                ArogyaCare
             </Link>
             <p className="text-sm">Your complete healthcare companion.</p>
           </div>
