@@ -1,3 +1,4 @@
+
 import * as admin from 'firebase-admin';
 
 // This function initializes the Firebase Admin SDK.
@@ -25,11 +26,11 @@ function initializeFirebaseAdmin() {
 
   try {
     // Initialize the Firebase Admin SDK with the credentials.
+    // The .replace() is crucial for correctly parsing the private key from the .env file.
     const app = admin.initializeApp({
       credential: admin.credential.cert({
         projectId: projectId,
         clientEmail: clientEmail,
-        // The .replace() is crucial for correctly parsing the private key from the .env file.
         privateKey: privateKey.replace(/\\n/g, '\n'),
       }),
     });
@@ -37,6 +38,10 @@ function initializeFirebaseAdmin() {
     return app;
   } catch (error: any) {
     console.error('Firebase admin initialization error:', error.message);
+    // Log the specific error to help diagnose issues with credentials.
+    if (error.code === 'auth/invalid-credential') {
+        console.error("The Firebase Admin SDK private key is invalid. Please check your .env.local file.");
+    }
     return null;
   }
 }
