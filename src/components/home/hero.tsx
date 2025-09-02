@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Heart } from "lucide-react";
-import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -23,9 +22,24 @@ export default function Hero() {
             </Button>
           </div>
         </div>
-        <div className="relative flex justify-center items-center h-full">
+        <div className="relative flex justify-center items-center h-60">
             <div className="absolute inset-0 bg-primary/10 rounded-full blur-3xl"></div>
-            <Heart className="relative w-48 h-48 md:w-72 md:h-72 text-primary animate-beat" fill="currentColor" />
+            <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+                <svg
+                    viewBox="0 0 400 150"
+                    className="w-full h-auto"
+                    preserveAspectRatio="xMidYMid meet"
+                >
+                    <path
+                        d="M0,75 C20,75 30,30 40,75 C50,120 60,75 70,75 L120,75 L125,50 L130,100 L135,25 L140,75 L400,75"
+                        stroke="hsl(var(--primary))"
+                        strokeWidth="4"
+                        fill="none"
+                        className="animate-pulse-line"
+                        strokeLinecap="round"
+                    />
+                </svg>
+            </div>
         </div>
       </div>
     </section>
