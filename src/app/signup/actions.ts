@@ -8,9 +8,9 @@ interface SignUpResult {
 }
 
 export async function signUp(formData: any): Promise<SignUpResult> {
-  const { email, password } = formData;
   try {
     const auth = getFirebaseAuth();
+    const { email, password } = formData;
     const userRecord = await auth.createUser({
       email,
       password,
@@ -20,7 +20,7 @@ export async function signUp(formData: any): Promise<SignUpResult> {
     console.error("Sign-up error:", error);
     let errorMessage = "An unexpected error occurred during sign up.";
 
-    if (error.code) {
+    if (error && error.code) {
         switch (error.code) {
             case 'auth/email-already-exists':
                 errorMessage = 'An account with this email already exists.';
@@ -34,7 +34,7 @@ export async function signUp(formData: any): Promise<SignUpResult> {
             default:
                  errorMessage = `An unexpected error occurred: ${error.message}`;
         }
-    } else if (error.message) {
+    } else if (error && error.message) {
         errorMessage = error.message;
     }
 
