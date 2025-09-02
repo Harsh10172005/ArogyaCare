@@ -43,14 +43,14 @@ export default function FeatureCards() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature) => (
               <Link href={feature.href} key={feature.title} className="group">
-                <Card className="h-full hover:shadow-lg hover:-translate-y-1 transition-transform duration-300">
+                <Card className="h-full shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                   <CardHeader className="flex flex-row items-center justify-between pb-2">
                     <CardTitle className="text-lg font-semibold">{feature.title}</CardTitle>
                     <feature.icon className="h-8 w-8 text-primary" />
                   </CardHeader>
                   <CardContent>
                     <p className="text-muted-foreground">{feature.description}</p>
-                    <div className="flex items-center mt-4 font-semibold text-primary group-hover:text-accent transition-colors">
+                    <div className="flex items-center mt-4 font-semibold text-primary group-hover:text-accent-foreground transition-colors">
                       Learn More <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform"/>
                     </div>
                   </CardContent>
