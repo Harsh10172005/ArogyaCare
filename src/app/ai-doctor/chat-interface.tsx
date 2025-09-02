@@ -32,11 +32,12 @@ export function ChatInterface() {
     defaultValues: { query: '' },
   });
 
+  const isSubmitting = form.formState.isSubmitting;
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setMessages((prev) => [...prev, { role: 'user', content: values.query }]);
     setIsLoading(true);
-    form.reset();
-
+    
     const result = await getAIResponse(values.query);
     
     if (result.response) {
@@ -44,7 +45,9 @@ export function ChatInterface() {
     } else if (result.error) {
       setMessages((prev) => [...prev, { role: 'assistant', content: `Error: ${result.error}` }]);
     }
+    
     setIsLoading(false);
+    form.reset();
   }
 
   return (
@@ -105,13 +108,13 @@ export function ChatInterface() {
               render={({ field }) => (
                 <FormItem className="flex-grow">
                   <FormControl>
-                    <Input placeholder="Ask about symptoms, diet, or general health..." {...field} disabled={isLoading} />
+                    <Input placeholder="Ask about symptoms, diet, or general health..." {...field} disabled={isSubmitting || isLoading} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={isLoading} size="icon">
+            <Button type="submit" disabled={isSubmitting || isLoading} size="icon">
               <Send className="h-4 w-4" />
             </Button>
           </form>
