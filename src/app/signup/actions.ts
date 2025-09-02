@@ -19,6 +19,11 @@ export async function signUp(formData: any): Promise<SignUpResult> {
     return { uid: userRecord.uid };
   } catch (error: any) {
     console.error("Sign-up error:", error);
+
+    if (!error) {
+        return { error: "An unknown error occurred during sign-up." };
+    }
+    
     // Providing more specific error messages based on Firebase error codes.
     if (error.code === 'auth/email-already-exists') {
         return { error: 'An account with this email already exists.' };
