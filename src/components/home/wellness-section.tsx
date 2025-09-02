@@ -13,7 +13,7 @@ const wellnessData = {
     supplements: {
         title: "Essential Supplements",
         description: "While a healthy diet should provide most of your nutrients, sometimes supplements can help fill the gaps. From Vitamin D to Omega-3, learn about what might be beneficial for your specific health goals and needs, but always consult a doctor first.",
-        image: "https://picsum.photos/500/300?random=2",
+        image: "https://health.drmorepen.com/cdn/shop/articles/a-guide-to-nutrition-supplements-for-your-health-233967_cf4b7655-fada-4fd6-a0c8-dd1132718a3e.webp?v=1738819094",
         hint: "vitamins pills"
     },
     healthyHabits: {
@@ -66,7 +66,7 @@ function WellnessContent({ title, description, image, hint }: { title: string, d
                     <h3 className="text-2xl font-bold text-primary">{title}</h3>
                     <p className="text-muted-foreground">{description}</p>
                 </div>
-                <div className="relative h-64 md:h-auto">
+                <div className="relative h-64">
                     <Image 
                         src={image} 
                         alt={title}
