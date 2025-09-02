@@ -30,12 +30,25 @@ const chatFlow = ai.defineFlow(
     inputSchema: ChatInputSchema,
     outputSchema: ChatOutputSchema,
   },
-  async (input, streamingCallback) => {
-    const llmResponse = await ai.generate({
-      model: 'googleai/gemini-pro',
-      prompt: `You are a helpful AI health assistant called ArogyaCare. Provide informative and safe general health guidance. Do not provide medical advice. Be friendly and conversational. Respond to the following message: ${input.message}`,
-    });
+  async (input) => {
+    try {
+      const llmResponse = await ai.generate({
+        model: 'googleai/gemini-pro',
+        prompt: `You are a helpful AI health assistant called ArogyaCare. Provide informative and safe general health guidance. Do not provide medical advice. Be friendly and conversational. Respond to the following message: ${input.message}`,
+      });
 
-    return { response: llmResponse.text };
+      const responseText = llmResponse.text;
+      if (!responseText) {
+          console.error('AI response text is empty.');
+          throw new Error('AI response was empty.');
+      }
+      
+      return { response: responseText };
+
+    } catch (e: any) {
+        console.error("Error within chatFlow:", e);
+        // Re-throw the error to be caught by the action
+        throw new Error(`Flow failed: ${e.message}`);
+    }
   }
 );

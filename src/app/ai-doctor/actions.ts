@@ -9,8 +9,9 @@ export async function getAIResponse(query: string): Promise<{ response?: string;
   try {
     const result = await chat({ message: query });
     return { response: result.response };
-  } catch (error) {
-    console.error('AI Error:', error);
-    return { error: 'An unexpected error occurred. Please try again.' };
+  } catch (error: any) {
+    console.error('Error calling chat flow from action:', error);
+    // Return a more specific error message to the client
+    return { error: `AI service failed: ${error.message}. Please try again.` };
   }
 }
