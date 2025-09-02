@@ -9,7 +9,6 @@ function initializeFirebaseAdmin() {
   }
 
   // Retrieve credentials from environment variables.
-  // Next.js automatically loads variables from .env.local into process.env on the server-side.
   const privateKey = process.env.FIREBASE_PRIVATE_KEY;
   const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
   const projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
