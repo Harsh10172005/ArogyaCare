@@ -9,12 +9,18 @@ if (typeof window !== 'undefined') {
 let auth: admin.auth.Auth;
 
 if (!admin.apps.length) {
+  // Use the correct environment variable names for server-side in Next.js
   const projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
-  const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
-  const privateKey = process.env.FIREBASE_PRIVATE_KEY;
+  const clientEmail = process.env.FIREBASE_ADMIN_CLIENT_EMAIL;
+  const privateKey = process.env.FIREBASE_ADMIN_PRIVATE_KEY;
 
   if (!projectId || !clientEmail || !privateKey) {
-    throw new Error('Firebase Admin SDK environment variables are not configured. Please check your .env.local file.');
+    console.error('Firebase Admin SDK Missing Variables:', {
+        projectId: !!projectId,
+        clientEmail: !!clientEmail,
+        privateKey: !!privateKey
+    });
+    throw new Error('Firebase Admin SDK environment variables are not configured. Please check your .env file and ensure it is in the root directory.');
   }
 
   try {
