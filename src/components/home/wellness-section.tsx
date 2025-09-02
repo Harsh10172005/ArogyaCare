@@ -7,7 +7,7 @@ const wellnessData = {
     nutrition: {
         title: "Balanced Nutrition",
         description: "A balanced diet is crucial for good health and well-being. It provides your body with the energy, protein, essential fats, vitamins, and minerals to live, grow, and function properly. We provide guidance on creating a diet plan that works for you.",
-        image: "https://www.eggoz.com/cdn/shop/articles/Blog-Cover-Image-Final-1920-x-1080-px-1080-x-1920-px-766-x-500-px-73.webp?v=1720532642",
+        image: "https://media.istockphoto.com/id/947378396/vector/healthy-eating-plate.jpg?s=612x612&w=0&k=20&c=GoX0WK0I6GrY6NLYliDmxOBS2GMrus2VSi4deTrXoG0=",
         hint: "healthy food"
     },
     supplements: {
