@@ -33,7 +33,7 @@ const chatFlow = ai.defineFlow(
   async (input) => {
     try {
       const llmResponse = await ai.generate({
-        model: 'googleai/gemini-pro',
+        model: 'googleai/gemini-1.0-pro',
         prompt: `You are a helpful AI health assistant called ArogyaCare. Provide informative and safe general health guidance. Do not provide medical advice. Be friendly and conversational. Respond to the following message: ${input.message}`,
       });
 
