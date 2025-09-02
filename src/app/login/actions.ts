@@ -1,6 +1,7 @@
+
 "use server";
 
-import { getFirebaseAuth } from "@/lib/firebase-admin";
+import { auth } from "@/lib/firebase-admin";
 
 interface SignInResult {
   sessionCookie?: string;
@@ -12,7 +13,6 @@ interface SignInResult {
 export async function signIn(formData: any): Promise<SignInResult> {
   const { email, password } = formData;
   try {
-    const auth = getFirebaseAuth();
     
     // The Admin SDK cannot verify passwords directly. 
     // This is a placeholder to check if the user exists.
