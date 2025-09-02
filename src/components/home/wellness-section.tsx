@@ -62,17 +62,16 @@ function WellnessContent({ title, description, image, hint }: { title: string, d
     return (
         <Card className="overflow-hidden">
             <div className="grid md:grid-cols-2 items-center">
-                <div className="p-8 pl-12 space-y-4">
+                <div className="p-8 space-y-4">
                     <h3 className="text-2xl font-bold text-primary">{title}</h3>
                     <p className="text-muted-foreground">{description}</p>
                 </div>
-                <div className="relative h-[32rem]">
+                <div className="relative h-96">
                     <Image 
                         src={image} 
                         alt={title}
-                        width={500}
-                        height={300}
-                        className="w-full h-full object-cover"
+                        fill
+                        className="object-cover"
                         data-ai-hint={hint}
                     />
                 </div>

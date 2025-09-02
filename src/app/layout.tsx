@@ -25,9 +25,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(poppins.className, "min-h-screen bg-background font-sans antialiased")}>
         <Header />
-        <div className="flex-grow">
+        <main className="flex-grow">
           {children}
-        </div>
+        </main>
         <Footer />
         <Toaster />
       </body>

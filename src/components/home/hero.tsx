@@ -6,7 +6,7 @@ export default function Hero() {
   return (
     <section className="w-full bg-secondary">
       <div className="container grid md:grid-cols-2 gap-16 items-center py-24 sm:py-32">
-        <div className="space-y-6 text-center md:text-left p-4 md:p-8">
+        <div className="space-y-6 text-center md:text-left">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground tracking-tighter">
             Your Health, <br />
             Our Priority.
