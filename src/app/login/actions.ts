@@ -1,6 +1,6 @@
 "use server";
 
-import { firebaseAdmin } from "@/lib/firebase-admin";
+import { firebaseAuth } from "@/lib/firebase-admin";
 
 interface SignInResult {
   sessionCookie?: string;
@@ -14,7 +14,7 @@ export async function signIn(formData: any): Promise<SignInResult> {
   try {
     // Get the user to create a session for.
     // In a real app, you'd also verify their password here.
-    const user = await firebaseAdmin.auth().getUserByEmail(email);
+    const user = await firebaseAuth.getUserByEmail(email);
 
     // Create a session cookie.
     const expiresIn = 60 * 60 * 24 * 5 * 1000; // 5 days
@@ -30,9 +30,13 @@ export async function signIn(formData: any): Promise<SignInResult> {
     return { sessionCookie: placeholderToken };
     
   } catch (error: any) {
+    console.error("Sign-in error:", error.message);
     if (error.code === 'auth/user-not-found') {
       return { error: "No account found with that email." };
     }
-    return { error: error.message };
+    if (error.code === 'auth/invalid-credential') {
+        return { error: "Invalid credentials provided." };
+    }
+    return { error: "An unexpected error occurred during sign-in." };
   }
 }

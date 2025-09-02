@@ -1,6 +1,6 @@
 "use server";
 
-import { firebaseAdmin } from "@/lib/firebase-admin";
+import { firebaseAuth } from "@/lib/firebase-admin";
 
 interface SignUpResult {
   uid?: string;
@@ -10,15 +10,16 @@ interface SignUpResult {
 export async function signUp(formData: any): Promise<SignUpResult> {
   const { email, password } = formData;
   try {
-    const userRecord = await firebaseAdmin.auth().createUser({
+    const userRecord = await firebaseAuth.createUser({
       email,
       password,
     });
     return { uid: userRecord.uid };
   } catch (error: any) {
+    console.error("Sign-up error:", error.message);
     if (error.code === 'auth/email-already-exists') {
         return { error: 'An account with this email already exists.' };
     }
-    return { error: error.message };
+    return { error: "An unexpected error occurred during sign-up." };
   }
 }
