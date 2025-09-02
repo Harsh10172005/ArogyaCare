@@ -66,7 +66,7 @@ function WellnessContent({ title, description, image, hint }: { title: string, d
                     <h3 className="text-2xl font-bold text-primary">{title}</h3>
                     <p className="text-muted-foreground">{description}</p>
                 </div>
-                <div className="relative h-64">
+                <div className="relative h-80">
                     <Image 
                         src={image} 
                         alt={title}
