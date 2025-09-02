@@ -11,6 +11,7 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
+import {googleAI} from '@genkit-ai/googleai';
 
 const AIGeneralHealthGuidanceInputSchema = z.object({
   query: z.string().describe('The user health-related question.'),
@@ -36,6 +37,7 @@ const prompt = ai.definePrompt({
   name: 'aiGeneralHealthGuidancePrompt',
   input: {schema: AIGeneralHealthGuidanceInputSchema},
   output: {schema: AIGeneralHealthGuidanceOutputSchema},
+  model: googleAI('gemini-pro'),
   prompt: `You are a helpful AI chatbot providing general health guidance.
 
   Respond to the following user question with an informative response:
