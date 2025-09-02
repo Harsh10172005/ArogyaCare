@@ -1,20 +1,23 @@
 import * as admin from 'firebase-admin';
 
-const firebaseAdminConfig = {
-  projectId: "arogyacare-yf3yk",
-  privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-  clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+const getFirebaseAdmin = () => {
+  if (admin.apps.length > 0) {
+    return admin.app();
+  }
+
+  const firebaseAdminConfig = {
+    projectId: 'arogyacare-yf3yk',
+    privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+    clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+  };
+  
+  if (!firebaseAdminConfig.privateKey || !firebaseAdminConfig.clientEmail) {
+    throw new Error('Firebase admin credentials not found in environment variables.');
+  }
+
+  return admin.initializeApp({
+    credential: admin.credential.cert(firebaseAdminConfig),
+  });
 };
 
-let firebaseAdmin: admin.app.App;
-
-if (!admin.apps.length) {
-  firebaseAdmin = admin.initializeApp({
-    credential: admin.credential.cert(firebaseAdminConfig),
-    databaseURL: `https://${firebaseAdminConfig.projectId}.firebaseio.com`,
-  });
-} else {
-  firebaseAdmin = admin.app();
-}
-
-export { firebaseAdmin };
+export const firebaseAdmin = getFirebaseAdmin();
