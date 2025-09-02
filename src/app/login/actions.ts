@@ -1,6 +1,6 @@
 "use server";
 
-import { firebaseAuth } from "@/lib/firebase-admin";
+import { getFirebaseAuth } from "@/lib/firebase-admin";
 
 interface SignInResult {
   sessionCookie?: string;
@@ -12,8 +12,7 @@ interface SignInResult {
 export async function signIn(formData: any): Promise<SignInResult> {
   const { email, password } = formData;
   try {
-    // The firebaseAuth getter handles initialization.
-    const auth = firebaseAuth;
+    const auth = getFirebaseAuth();
     
     // The Admin SDK cannot verify passwords directly. 
     // This is a placeholder to check if the user exists.
@@ -36,17 +35,26 @@ export async function signIn(formData: any): Promise<SignInResult> {
     
   } catch (error: any) {
     console.error("Sign-in error:", error);
-    if (error.code === 'auth/user-not-found') {
-      return { error: "No account found with this email." };
+    let errorMessage = "An unexpected error occurred during sign in.";
+    
+    if (error.code) {
+        switch (error.code) {
+            case 'auth/user-not-found':
+              errorMessage = "No account found with this email.";
+              break;
+            case 'auth/invalid-credential':
+            case 'auth/wrong-password':
+              errorMessage = "Invalid credentials provided. Please check your email and password.";
+              break;
+            case 'auth/invalid-email':
+              errorMessage = "Please enter a valid email address.";
+              break;
+            default:
+              errorMessage = `An unexpected error occurred: ${error.message}`;
+        }
+    } else if (error.message) {
+        errorMessage = error.message;
     }
-    // This will catch wrong passwords if using a method that verifies them,
-    // but with getUserByEmail, it mainly catches not-found errors.
-    if (error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password') {
-        return { error: "Invalid credentials provided. Please check your email and password." };
-    }
-    if(error.code === 'auth/invalid-email') {
-        return { error: "Please enter a valid email address." };
-    }
-    return { error: `An unexpected error occurred during sign-in: ${error.message}` };
+    return { error: errorMessage };
   }
 }

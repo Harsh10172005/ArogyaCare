@@ -1,6 +1,6 @@
 "use server";
 
-import { firebaseAuth } from "@/lib/firebase-admin";
+import { getFirebaseAuth } from "@/lib/firebase-admin";
 
 interface SignUpResult {
   uid?: string;
@@ -10,8 +10,7 @@ interface SignUpResult {
 export async function signUp(formData: any): Promise<SignUpResult> {
   const { email, password } = formData;
   try {
-    // The firebaseAuth getter handles initialization.
-    const auth = firebaseAuth;
+    const auth = getFirebaseAuth();
     const userRecord = await auth.createUser({
       email,
       password,
@@ -19,18 +18,26 @@ export async function signUp(formData: any): Promise<SignUpResult> {
     return { uid: userRecord.uid };
   } catch (error: any) {
     console.error("Sign-up error:", error);
+    let errorMessage = "An unexpected error occurred during sign up.";
 
-    // Providing more specific error messages based on Firebase error codes.
-    if (error?.code === 'auth/email-already-exists') {
-        return { error: 'An account with this email already exists.' };
+    if (error.code) {
+        switch (error.code) {
+            case 'auth/email-already-exists':
+                errorMessage = 'An account with this email already exists.';
+                break;
+            case 'auth/invalid-email':
+                errorMessage = 'The email address is not valid.';
+                break;
+            case 'auth/weak-password':
+                errorMessage = 'The password is too weak. It must be at least 6 characters long.';
+                break;
+            default:
+                 errorMessage = `An unexpected error occurred: ${error.message}`;
+        }
+    } else if (error.message) {
+        errorMessage = error.message;
     }
-    if (error?.code === 'auth/invalid-email') {
-        return { error: 'The email address is not valid.' };
-    }
-    if (error?.code === 'auth/weak-password') {
-        return { error: 'The password is too weak. It must be at least 6 characters long.' };
-    }
-    // Catch-all for any other Firebase or initialization errors.
-    return { error: `An unexpected error occurred: ${error?.message || 'Unknown error.'}` };
+
+    return { error: errorMessage };
   }
 }
