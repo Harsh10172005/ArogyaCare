@@ -88,7 +88,7 @@ export default {
         },
         'beat': {
           '0%, 100%': { transform: 'scale(1)' },
-          '50%': { transform: 'scale(1.1)' },
+          '50%': { transform: 'scale(1.25)' },
         },
         'pulse-line': {
             '0%': { strokeDasharray: '0, 1000' },
