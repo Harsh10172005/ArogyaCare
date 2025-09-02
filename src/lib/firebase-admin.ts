@@ -1,34 +1,36 @@
 import * as admin from 'firebase-admin';
-import dotenv from 'dotenv';
-import path from 'path';
 
-// Load environment variables from .env file at the very top
-dotenv.config({ path: path.resolve(process.cwd(), '.env') });
-
+// This function initializes the Firebase Admin SDK.
+// It checks if an app is already initialized to prevent re-initialization.
 function initializeFirebaseAdmin() {
+  // If an app is already initialized, return it.
   if (admin.apps.length > 0) {
     return admin.app();
   }
 
+  // Retrieve credentials from environment variables.
+  // Next.js automatically loads variables from .env.local into process.env on the server-side.
   const privateKey = process.env.FIREBASE_PRIVATE_KEY;
   const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
   const projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
-  
+
+  // Check if all required environment variables are present.
   if (!privateKey || !clientEmail || !projectId) {
-    console.error("Firebase admin credentials are not fully configured. Check your .env file.");
+    console.error("Firebase admin credentials are not fully configured in .env.local");
     if (!privateKey) console.error("FIREBASE_PRIVATE_KEY is missing.");
     if (!clientEmail) console.error("FIREBASE_CLIENT_EMAIL is missing.");
     if (!projectId) console.error("NEXT_PUBLIC_FIREBASE_PROJECT_ID is missing.");
-    // Do not proceed with initialization if credentials are not there.
+    // Return null if initialization cannot proceed.
     return null;
   }
 
   try {
+    // Initialize the Firebase Admin SDK with the credentials.
     const app = admin.initializeApp({
       credential: admin.credential.cert({
         projectId: projectId,
         clientEmail: clientEmail,
-        // The replace is crucial for parsing the key from the .env file.
+        // The .replace() is crucial for correctly parsing the private key from the .env file.
         privateKey: privateKey.replace(/\\n/g, '\n'),
       }),
     });
@@ -40,13 +42,15 @@ function initializeFirebaseAdmin() {
   }
 }
 
-// A getter for the auth instance that can be used by other parts of the app.
+// A getter for the auth instance.
+// Throws an error if the Admin SDK has not been initialized.
 export const getFirebaseAuth = () => {
-    const app = initializeFirebaseAdmin();
-    if (!app) {
-        throw new Error("Firebase Admin SDK has not been initialized. Check server logs for details.");
-    }
-    return admin.auth(app);
+  const app = initializeFirebaseAdmin();
+  if (!app) {
+    throw new Error("Firebase Admin SDK has not been initialized. Check server logs for details. Ensure .env.local is configured correctly.");
+  }
+  return admin.auth(app);
 };
 
+// Export firebase-admin for other potential uses.
 export const firebaseAdmin = admin;
