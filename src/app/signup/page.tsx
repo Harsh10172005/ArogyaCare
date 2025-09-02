@@ -24,7 +24,7 @@ import {
 import Link from "next/link";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
-import { signIn } from "./actions";
+import { signUp } from "./actions";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -35,7 +35,7 @@ const formSchema = z.object({
   }),
 });
 
-export default function LoginPage() {
+export default function SignUpPage() {
   const { toast } = useToast();
   const router = useRouter();
 
@@ -48,7 +48,7 @@ export default function LoginPage() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const result = await signIn(values);
+    const result = await signUp(values);
     if (result.error) {
       toast({
         title: "Error",
@@ -58,9 +58,9 @@ export default function LoginPage() {
     } else {
       toast({
         title: "Success",
-        description: "Logged in successfully!",
+        description: "Account created successfully! Please log in.",
       });
-      router.push("/");
+      router.push("/login");
     }
   }
 
@@ -68,9 +68,9 @@ export default function LoginPage() {
     <div className="flex items-center justify-center min-h-[calc(100vh-10rem)] py-12">
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardTitle className="text-2xl">Sign Up</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            Create an account to get started.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -97,12 +97,7 @@ export default function LoginPage() {
                 name="password"
                 render={({ field }) => (
                   <FormItem className="grid gap-2">
-                     <div className="flex items-center">
-                        <FormLabel>Password</FormLabel>
-                        <Link href="#" className="ml-auto inline-block text-sm underline">
-                            Forgot your password?
-                        </Link>
-                    </div>
+                    <FormLabel>Password</FormLabel>
                     <FormControl>
                       <Input type="password" {...field} />
                     </FormControl>
@@ -111,15 +106,15 @@ export default function LoginPage() {
                 )}
               />
               <Button type="submit" className="w-full">
-                Login
+                Sign Up
               </Button>
             </form>
           </Form>
         </CardContent>
         <CardFooter className="text-center text-sm">
-          Don't have an account?
-          <Link href="/signup" className="underline ml-1">
-            Sign up
+          Already have an account?
+          <Link href="/login" className="underline ml-1">
+            Login
           </Link>
         </CardFooter>
       </Card>

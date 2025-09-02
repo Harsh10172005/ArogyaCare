@@ -51,7 +51,13 @@ const nextConfig: NextConfig = {
         hostname: 'assets.clevelandclinic.org',
         port: '',
         pathname: '/**',
-      }
+      },
+       {
+        protocol: 'https',
+        hostname: 'firebasestorage.googleapis.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 };
