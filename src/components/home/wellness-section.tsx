@@ -19,7 +19,7 @@ const wellnessData = {
     healthyHabits: {
         title: "Building Healthy Habits",
         description: "Small, consistent changes can lead to significant health improvements. We focus on key habits like regular exercise, adequate sleep, stress management, and hydration to help you build a sustainable, healthy lifestyle for the long term.",
-        image: "https://picsum.photos/800/600",
+        image: "https://assets.clevelandclinic.org/m/5e7e5b52c28ee023/webimage-exerciseHowOften-944015592-770x533-1_jpg.png",
         hint: "beating heart"
     }
 }

@@ -45,6 +45,12 @@ const nextConfig: NextConfig = {
         hostname: 'health.drmorepen.com',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'assets.clevelandclinic.org',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
