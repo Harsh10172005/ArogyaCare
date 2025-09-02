@@ -1,5 +1,5 @@
 'use server';
-import { aiGeneralHealthGuidance } from '@/ai/flows/ai-general-health-guidance';
+import { chat } from '@/ai/flows/chat-flow';
 
 export async function getAIResponse(query: string): Promise<{ response?: string; error?: string }> {
   if (!query || query.trim().length === 0) {
@@ -7,7 +7,7 @@ export async function getAIResponse(query: string): Promise<{ response?: string;
   }
 
   try {
-    const result = await aiGeneralHealthGuidance({ query });
+    const result = await chat({ message: query });
     return { response: result.response };
   } catch (error) {
     console.error('AI Error:', error);
