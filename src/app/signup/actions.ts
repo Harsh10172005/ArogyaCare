@@ -10,13 +10,16 @@ interface SignUpResult {
 export async function signUp(formData: any): Promise<SignUpResult> {
   const { email, password } = formData;
   try {
-    const userRecord = await firebaseAuth.createUser({
+    // The firebaseAuth getter handles initialization.
+    const auth = firebaseAuth;
+    const userRecord = await auth.createUser({
       email,
       password,
     });
     return { uid: userRecord.uid };
   } catch (error: any) {
     console.error("Sign-up error:", error);
+    // Providing more specific error messages based on Firebase error codes.
     if (error.code === 'auth/email-already-exists') {
         return { error: 'An account with this email already exists.' };
     }
@@ -26,6 +29,7 @@ export async function signUp(formData: any): Promise<SignUpResult> {
     if (error.code === 'auth/weak-password') {
         return { error: 'The password is too weak. It must be at least 6 characters long.' };
     }
-    return { error: "An unexpected error occurred during sign-up." };
+    // Catch-all for any other Firebase or initialization errors.
+    return { error: `An unexpected error occurred: ${error.message}` };
   }
 }
