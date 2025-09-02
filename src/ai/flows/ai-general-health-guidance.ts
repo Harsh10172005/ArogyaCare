@@ -39,7 +39,7 @@ const prompt = ai.definePrompt({
   prompt: `You are a helpful AI chatbot providing general health guidance.
 
   Respond to the following user question with an informative response:
-  {{query}}`,
+  {{{query}}}`,
 });
 
 const aiGeneralHealthGuidanceFlow = ai.defineFlow(
