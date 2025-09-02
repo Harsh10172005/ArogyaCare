@@ -1,7 +1,6 @@
 "use server";
 
 import { firebaseAdmin } from "@/lib/firebase-admin";
-import { auth } from "firebase-admin";
 
 interface SignUpResult {
   uid?: string;
@@ -11,7 +10,7 @@ interface SignUpResult {
 export async function signUp(formData: any): Promise<SignUpResult> {
   const { email, password } = formData;
   try {
-    const userRecord = await auth(firebaseAdmin).createUser({
+    const userRecord = await firebaseAdmin.auth().createUser({
       email,
       password,
     });

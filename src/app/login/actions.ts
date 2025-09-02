@@ -1,7 +1,6 @@
 "use server";
 
 import { firebaseAdmin } from "@/lib/firebase-admin";
-import { auth } from "firebase-admin";
 
 interface SignInResult {
   sessionCookie?: string;
@@ -18,7 +17,7 @@ export async function signIn(formData: any): Promise<SignInResult> {
     
     // This is a placeholder. In a real app, you would get the user record
     // from Firebase Auth after they sign in on the client.
-    const sessionCookie = await auth(firebaseAdmin).createSessionCookie(idToken, { expiresIn });
+    const sessionCookie = await firebaseAdmin.auth().createSessionCookie(idToken, { expiresIn });
     
     // In a real app, you would set the cookie in the browser response.
     // For this example, we'll just return it.
