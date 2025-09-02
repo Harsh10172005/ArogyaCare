@@ -1,60 +1,50 @@
 
 import * as admin from 'firebase-admin';
+import { Buffer } from 'buffer';
 
-// This function initializes the Firebase Admin SDK.
-// It checks if an app is already initialized to prevent re-initialization.
 function initializeFirebaseAdmin() {
-  // If an app is already initialized, return it.
   if (admin.apps.length > 0) {
     return admin.app();
   }
 
-  // Retrieve credentials from environment variables.
-  const privateKey = process.env.FIREBASE_PRIVATE_KEY;
-  const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
   const projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
+  const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
+  // The private key is now expected to be a Base64 encoded string
+  const privateKeyBase64 = process.env.FIREBASE_PRIVATE_KEY_BASE64;
 
-  // Check if all required environment variables are present.
-  if (!privateKey || !clientEmail || !projectId) {
-    console.error("Firebase admin credentials are not fully configured in .env.local");
-    if (!privateKey) console.error("FIREBASE_PRIVATE_KEY is missing.");
-    if (!clientEmail) console.error("FIREBASE_CLIENT_EMAIL is missing.");
+  if (!projectId || !clientEmail || !privateKeyBase64) {
+    console.error("Firebase admin environment variables not fully configured.");
     if (!projectId) console.error("NEXT_PUBLIC_FIREBASE_PROJECT_ID is missing.");
-    // Return null if initialization cannot proceed.
+    if (!clientEmail) console.error("FIREBASE_CLIENT_EMAIL is missing.");
+    if (!privateKeyBase64) console.error("FIREBASE_PRIVATE_KEY_BASE64 is missing.");
     return null;
   }
 
   try {
-    // Initialize the Firebase Admin SDK with the credentials.
-    // The .replace() is crucial for correctly parsing the private key from the .env file.
+    // Decode the Base64 private key back to the original format
+    const privateKey = Buffer.from(privateKeyBase64, 'base64').toString('utf8');
+
     const app = admin.initializeApp({
       credential: admin.credential.cert({
         projectId: projectId,
         clientEmail: clientEmail,
-        privateKey: privateKey.replace(/\\n/g, '\n'),
+        privateKey: privateKey,
       }),
     });
     console.log('Firebase admin app initialized successfully.');
     return app;
   } catch (error: any) {
     console.error('Firebase admin initialization error:', error.message);
-    // Log the specific error to help diagnose issues with credentials.
-    if (error.code === 'auth/invalid-credential') {
-        console.error("The Firebase Admin SDK private key is invalid. Please check your .env.local file.");
-    }
     return null;
   }
 }
 
-// A getter for the auth instance.
-// Throws an error if the Admin SDK has not been initialized.
 export const getFirebaseAuth = () => {
   const app = initializeFirebaseAdmin();
   if (!app) {
-    throw new Error("Firebase Admin SDK has not been initialized. Check server logs for details. Ensure .env.local is configured correctly.");
+    throw new Error("Firebase Admin SDK has not been initialized. Check server logs for details. Ensure .env.local is configured correctly with the new Base64 format.");
   }
   return admin.auth(app);
 };
 
-// Export firebase-admin for other potential uses.
 export const firebaseAdmin = admin;
