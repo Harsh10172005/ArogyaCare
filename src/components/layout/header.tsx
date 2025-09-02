@@ -78,7 +78,9 @@ export default function Header() {
             <ShoppingCart className="h-5 w-5" />
             <span className="sr-only">Cart</span>
           </Button>
-          <Button>Login</Button>
+          <Button asChild>
+            <Link href="/login">Login</Link>
+          </Button>
         </div>
 
         <Sheet open={isSheetOpen} onOpenChange={setSheetOpen}>
@@ -125,7 +127,7 @@ export default function Header() {
                   </Link>
               </nav>
               <div className="mt-auto p-4 border-t flex flex-col gap-4">
-                <Button>Login</Button>
+                <Button asChild><Link href="/login" onClick={() => setSheetOpen(false)}>Login</Link></Button>
                 <Button variant="ghost" size="icon" className="self-center">
                     <ShoppingCart className="h-6 w-6" />
                     <span className="sr-only">Cart</span>
