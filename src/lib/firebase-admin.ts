@@ -1,18 +1,28 @@
 import * as admin from 'firebase-admin';
+import dotenv from 'dotenv';
+import path from 'path';
 
-// Ensure the app is only initialized once
-if (!admin.apps.length) {
+// Load environment variables from .env file
+dotenv.config({ path: path.resolve(process.cwd(), '.env') });
+
+function initializeFirebaseAdmin() {
+  if (admin.apps.length > 0) {
+    return;
+  }
+
+  const privateKey = process.env.FIREBASE_PRIVATE_KEY;
+  const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
+  const projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
+  
+  if (!privateKey || !clientEmail || !projectId) {
+    console.error("Firebase admin credentials are not fully configured in environment variables.");
+    return;
+  }
+
   try {
-    const privateKey = process.env.FIREBASE_PRIVATE_KEY;
-    const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
-
-    if (!privateKey || !clientEmail) {
-      throw new Error("Firebase admin credentials (FIREBASE_PRIVATE_KEY or FIREBASE_CLIENT_EMAIL) are not configured in environment variables.");
-    }
-
     admin.initializeApp({
       credential: admin.credential.cert({
-        projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || 'arogyacare-yf3yk',
+        projectId: projectId,
         clientEmail: clientEmail,
         // The replace is crucial for parsing the key from the .env file.
         privateKey: privateKey.replace(/\\n/g, '\n'),
@@ -21,14 +31,12 @@ if (!admin.apps.length) {
     console.log('Firebase admin app initialized successfully.');
   } catch (error: any) {
     console.error('Firebase admin initialization error:', error.message);
-    // We are throwing the error here to make it clear that initialization failed.
-    // The functions using this will need to handle the case where admin is not initialized.
   }
 }
 
 // A getter for the auth instance that can be used by other parts of the app.
-// It will throw an error if the app is not initialized, which actions can catch.
 export const getFirebaseAuth = () => {
+    initializeFirebaseAdmin();
     if (!admin.apps.length) {
         throw new Error("Firebase Admin SDK has not been initialized. Check server logs for details.");
     }
