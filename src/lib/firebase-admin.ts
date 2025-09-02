@@ -1,4 +1,7 @@
 import * as admin from 'firebase-admin';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 // This ensures we only initialize the app once, which is important in a
 // serverless environment or during development with hot-reloading.
