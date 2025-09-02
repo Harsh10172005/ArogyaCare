@@ -7,7 +7,7 @@ const wellnessData = {
     nutrition: {
         title: "Balanced Nutrition",
         description: "A balanced diet is crucial for good health and well-being. It provides your body with the energy, protein, essential fats, vitamins, and minerals to live, grow, and function properly. We provide guidance on creating a diet plan that works for you.",
-        image: "https://picsum.photos/500/300?random=1",
+        image: "https://storage.googleapis.com/project-spark-b29b2-public/story/f8d22383-a249-43c2-a05e-f7253503a60a/2/images/50700a0b-1934-4e2a-ac57-08033230b561.png",
         hint: "healthy food"
     },
     supplements: {
@@ -19,7 +19,7 @@ const wellnessData = {
     healthyHabits: {
         title: "Building Healthy Habits",
         description: "Small, consistent changes can lead to significant health improvements. We focus on key habits like regular exercise, adequate sleep, stress management, and hydration to help you build a sustainable, healthy lifestyle for the long term.",
-        image: "https://picsum.photos/500/300?random=3",
+        image: "https://picsum.photos/800/600",
         hint: "beating heart"
     }
 }
