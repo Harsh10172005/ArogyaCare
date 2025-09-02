@@ -108,13 +108,13 @@ export function ChatInterface() {
               render={({ field }) => (
                 <FormItem className="flex-grow">
                   <FormControl>
-                    <Input placeholder="Ask about symptoms, diet, or general health..." {...field} disabled={isSubmitting || isLoading} />
+                    <Input placeholder="Ask about symptoms, diet, or general health..." {...field} disabled={isLoading} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={isSubmitting || isLoading} size="icon">
+            <Button type="submit" disabled={isLoading} size="icon">
               <Send className="h-4 w-4" />
             </Button>
           </form>
