@@ -5,7 +5,7 @@ import { Hospital, MapPin, Phone } from "lucide-react";
 
 export default function HospitalsPage() {
   return (
-    <div className="container py-12 md:py-20">
+    <div className="container mx-auto px-4 py-12 md:py-20">
       <div className="text-center mb-12">
         <Hospital className="mx-auto h-12 w-12 text-primary" />
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight mt-4">Nearby Hospitals</h1>

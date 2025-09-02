@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 
 export default function MedicinesPage() {
   return (
-    <div className="container py-12 md:py-20">
+    <div className="container mx-auto px-4 py-12 md:py-20">
       <div className="text-center mb-8">
           <Pill className="mx-auto h-12 w-12 text-primary" />
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight mt-4">Order Medicines</h1>

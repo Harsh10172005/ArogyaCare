@@ -27,7 +27,7 @@ const wellnessData = {
 export default function WellnessSection() {
   return (
     <section className="w-full py-16 sm:py-24 bg-secondary">
-      <div className="container">
+      <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Live a Healthier Life</h2>
           <p className="mt-4 text-lg text-muted-foreground">
