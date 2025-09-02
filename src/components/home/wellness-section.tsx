@@ -70,9 +70,8 @@ function WellnessContent({ title, description, image, hint }: { title: string, d
                     <Image 
                         src={image} 
                         alt={title}
-                        layout="fill"
-                        objectFit="cover"
-                        className="w-full h-full"
+                        fill
+                        className="object-cover"
                         data-ai-hint={hint}
                     />
                 </div>
