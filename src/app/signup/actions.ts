@@ -20,21 +20,17 @@ export async function signUp(formData: any): Promise<SignUpResult> {
   } catch (error: any) {
     console.error("Sign-up error:", error);
 
-    if (!error) {
-        return { error: "An unknown error occurred during sign-up." };
-    }
-    
     // Providing more specific error messages based on Firebase error codes.
-    if (error.code === 'auth/email-already-exists') {
+    if (error?.code === 'auth/email-already-exists') {
         return { error: 'An account with this email already exists.' };
     }
-    if (error.code === 'auth/invalid-email') {
+    if (error?.code === 'auth/invalid-email') {
         return { error: 'The email address is not valid.' };
     }
-    if (error.code === 'auth/weak-password') {
+    if (error?.code === 'auth/weak-password') {
         return { error: 'The password is too weak. It must be at least 6 characters long.' };
     }
     // Catch-all for any other Firebase or initialization errors.
-    return { error: `An unexpected error occurred: ${error.message}` };
+    return { error: `An unexpected error occurred: ${error?.message || 'Unknown error.'}` };
   }
 }
