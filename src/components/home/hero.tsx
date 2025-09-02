@@ -24,7 +24,7 @@ export default function Hero() {
         </div>
         <div className="relative flex justify-center items-center h-60">
             <div className="absolute inset-0 bg-primary/10 rounded-full blur-3xl"></div>
-            <div className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden">
+            <div className="relative w-full h-full flex flex-col items-center justify-center">
                 <Heart className="h-24 w-24 text-primary/80 fill-primary/20 animate-beat mb-4" />
                 <svg
                     viewBox="0 0 400 150"
