@@ -10,33 +10,37 @@ interface SignInResult {
 // NOTE: This signIn function is a placeholder and not secure for production.
 // In a real application, you must verify the user's password or use an ID token from the client.
 export async function signIn(formData: any): Promise<SignInResult> {
-  const { email } = formData;
+  const { email, password } = formData;
   try {
-    // Get the user to create a session for.
-    // In a real app, you'd also verify their password here.
+    // This is not the recommended way to sign in users for production apps.
+    // A client-side sign-in flow that generates an ID token is more secure.
+    // However, to make the form work as expected for this demo,
+    // we'll attempt to verify the user this way.
+    // A common reason for failure here is that password-based sign-in
+    // is not directly supported this way in the Admin SDK.
+    // We can get the user, but not validate the password.
     const user = await firebaseAuth.getUserByEmail(email);
 
-    // Create a session cookie.
-    const expiresIn = 60 * 60 * 24 * 5 * 1000; // 5 days
-    // The session cookie is created by making a custom token and then using that
-    // in a more complex flow. For this example's simplicity, we are not implementing
-    // the full secure flow. This is a placeholder for where that logic would go.
-    // In a real app, you would not just return a success message.
-    // You would set the cookie in the browser.
+    // The Admin SDK cannot verify passwords. This is a limitation for security.
+    // The placeholder logic below simulates a successful login if the user exists.
+    // In a real app, the client would sign in, get an ID token, and send it here.
     
-    // WARNING: This is NOT a real session cookie.
     const placeholderToken = `session_for_${user.uid}_at_${Date.now()}`;
 
     return { sessionCookie: placeholderToken };
     
   } catch (error: any) {
-    console.error("Sign-in error:", error.message);
+    console.error("Sign-in error:", error);
     if (error.code === 'auth/user-not-found') {
       return { error: "No account found with that email." };
     }
-    if (error.code === 'auth/invalid-credential') {
-        return { error: "Invalid credentials provided." };
+    // This code is often returned for wrong passwords or other issues when using the Admin SDK improperly for sign-in.
+    if (error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password') {
+        return { error: "Invalid credentials provided. Please check your email and password." };
     }
-    return { error: "An unexpected error occurred during sign-in." };
+    if(error.code === 'auth/invalid-email') {
+        return { error: "Please enter a valid email address." };
+    }
+    return { error: "An unexpected error occurred during sign-in. Please try again." };
   }
 }
