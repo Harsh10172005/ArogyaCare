@@ -42,6 +42,7 @@ export default function Header() {
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-6">
           <Link href="/" className="flex items-center gap-2 text-xl font-bold text-primary p-2">
+            <Image src="https://i.postimg.cc/TYGz1K8b/arogya-care.png" alt="ArogyaCare Logo" width={32} height={32} />
             ArogyaCare
           </Link>
 
@@ -94,6 +95,7 @@ export default function Header() {
             <div className="flex flex-col h-full">
               <div className="flex items-center justify-between p-4 border-b">
                  <Link href="/" onClick={() => setSheetOpen(false)} className="flex items-center gap-2 text-xl font-bold text-primary">
+                    <Image src="https://i.postimg.cc/TYGz1K8b/arogya-care.png" alt="ArogyaCare Logo" width={32} height={32} />
                     ArogyaCare
                  </Link>
                  <SheetClose asChild>
