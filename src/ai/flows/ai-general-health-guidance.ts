@@ -5,13 +5,12 @@
  * @fileOverview Provides general health guidance using an AI chatbot.
  *
  * - aiGeneralHealthGuidance - A function that processes user health-related questions and returns informative responses.
- * - AIGeneralHealthGuidanceInput - The input type for the aiGeneralHealthGuidance function.
- * - AIGeneralHealthGuidanceOutput - The return type for the aiGeneralHealthGuidance function.
+ * - AIGeneralHealthGuidanceInput - The input type for the aiGeneralhealthGuidance function.
+ * - AIGeneralHealthGuidanceOutput - The return type for the aiGeneralhealthGuidance function.
  */
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
-import {googleAI} from '@genkit-ai/googleai';
 
 const AIGeneralHealthGuidanceInputSchema = z.object({
   query: z.string().describe('The user health-related question.'),
@@ -37,7 +36,6 @@ const prompt = ai.definePrompt({
   name: 'aiGeneralHealthGuidancePrompt',
   input: {schema: AIGeneralHealthGuidanceInputSchema},
   output: {schema: AIGeneralHealthGuidanceOutputSchema},
-  model: googleAI('gemini-pro'),
   prompt: `You are a helpful AI chatbot providing general health guidance.
 
   Respond to the following user question with an informative response:
@@ -51,7 +49,7 @@ const aiGeneralHealthGuidanceFlow = ai.defineFlow(
     outputSchema: AIGeneralHealthGuidanceOutputSchema,
   },
   async input => {
-    const {output} = await prompt(input);
+    const {output} = await prompt(input, { model: 'googleai/gemini-pro' });
     return output!;
   }
 );
