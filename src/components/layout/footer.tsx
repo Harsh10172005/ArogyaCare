@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="bg-muted text-muted-foreground">
       <div className="container py-12 text-center">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 pb-12">
           <div className="sm:col-span-2 md:col-span-1 md:text-left">
             <Link href="/" className="mb-4 inline-block text-xl font-bold text-primary">
                 ArogyaCare
