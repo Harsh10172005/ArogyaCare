@@ -29,7 +29,7 @@ export default function HospitalsPage() {
       <div className="max-w-6xl mx-auto">
         <HospitalMap />
 
-        <div className="space-y-6">
+        <div className="space-y-6 mt-8">
           {hospitals.map((hospital) => (
             <Card key={hospital.id} className="transition-all hover:shadow-lg">
               <CardHeader className="flex flex-col sm:flex-row justify-between items-start gap-4">
