@@ -6,9 +6,19 @@ import { Pill, ShoppingCart, Search, Package } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useContext } from "react";
 import { LanguageContext } from "@/context/language-context";
+import { useToast } from "@/hooks/use-toast";
 
 export default function MedicinesPage() {
   const { t } = useContext(LanguageContext);
+  const { toast } = useToast();
+
+  const handleAddToCart = (medicineName: string) => {
+    toast({
+      title: t('success'),
+      description: `${medicineName} ${t('addedToCart')}`,
+    });
+  };
+
   return (
     <div className="container mx-auto px-4 py-12 md:py-20">
       <div className="text-center mb-8">
@@ -39,7 +49,7 @@ export default function MedicinesPage() {
               </CardContent>
               <CardFooter className="flex justify-between items-center">
               <p className="text-xl font-bold text-primary">₹{medicine.price.toFixed(2)}</p>
-              <Button>
+              <Button onClick={() => handleAddToCart(medicine.name)}>
                   <ShoppingCart className="mr-2 h-4 w-4" /> {t('addToCart')}
               </Button>
               </CardFooter>
