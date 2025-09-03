@@ -14,7 +14,8 @@ import {
   Bot,
   X,
   Languages,
-  ChefHat
+  ChefHat,
+  LogOut
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -32,6 +33,7 @@ import { LanguageContext } from "@/context/language-context";
 import { CartSheet } from "./cart-sheet";
 import { CartContext } from "@/context/cart-context";
 import { Badge } from "../ui/badge";
+import { AuthContext } from "@/context/auth-context";
 
 export default function Header() {
   const [isSheetOpen, setSheetOpen] = useState(false);
@@ -40,6 +42,7 @@ export default function Header() {
   const router = useRouter();
   const { language, setLanguage, t } = useContext(LanguageContext);
   const { cart } = useContext(CartContext);
+  const { isLoggedIn, logout } = useContext(AuthContext);
 
   const navLinks = [
     { href: "/medicines", labelKey: "medicines", icon: Pill },
@@ -57,6 +60,10 @@ export default function Header() {
     }
   };
 
+  const handleLogout = () => {
+    logout();
+    router.push('/');
+  }
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -130,9 +137,16 @@ export default function Header() {
                 <span className="sr-only">Cart</span>
               </Button>
             </CartSheet>
-          <Button asChild>
-            <Link href="/login">{t('login')}</Link>
-          </Button>
+            {isLoggedIn ? (
+              <Button variant="outline" onClick={handleLogout}>
+                <LogOut className="mr-2 h-4 w-4" />
+                Sign Out
+              </Button>
+            ) : (
+              <Button asChild>
+                <Link href="/login">{t('login')}</Link>
+              </Button>
+            )}
         </div>
 
         <Sheet open={isSheetOpen} onOpenChange={setSheetOpen}>
@@ -195,7 +209,14 @@ export default function Header() {
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
-                <Button asChild><Link href="/login" onClick={() => setSheetOpen(false)}>{t('login')}</Link></Button>
+                {isLoggedIn ? (
+                  <Button variant="outline" onClick={() => { handleLogout(); setSheetOpen(false); }}>
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Sign Out
+                  </Button>
+                ) : (
+                  <Button asChild><Link href="/login" onClick={() => setSheetOpen(false)}>{t('login')}</Link></Button>
+                )}
                 <CartSheet>
                    <Button variant="outline" className="relative">
                       {cart.length > 0 && (

@@ -27,6 +27,7 @@ import { useRouter } from "next/navigation";
 import { signIn } from "./actions";
 import { useContext } from "react";
 import { LanguageContext } from "@/context/language-context";
+import { AuthContext } from "@/context/auth-context";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -41,6 +42,7 @@ export default function LoginPage() {
   const { toast } = useToast();
   const router = useRouter();
   const { t } = useContext(LanguageContext);
+  const { login } = useContext(AuthContext);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -63,6 +65,7 @@ export default function LoginPage() {
         title: t('success'),
         description: t('loggedInSuccess'),
       });
+      login();
       router.push("/");
     }
   }

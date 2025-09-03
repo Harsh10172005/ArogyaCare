@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 import { Poppins } from 'next/font/google';
 import { LanguageProvider } from '@/context/language-context';
 import { CartProvider } from '@/context/cart-context';
+import { AuthProvider } from '@/context/auth-context';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -29,14 +30,16 @@ export default function RootLayout({
       </head>
       <body className={cn(poppins.className, "min-h-screen bg-background font-sans antialiased")}>
         <LanguageProvider>
-          <CartProvider>
-            <Header />
-            <main className="flex-grow animate-fade-in">
-              {children}
-            </main>
-            <Footer />
-            <Toaster />
-          </CartProvider>
+          <AuthProvider>
+            <CartProvider>
+              <Header />
+              <main className="flex-grow animate-fade-in">
+                {children}
+              </main>
+              <Footer />
+              <Toaster />
+            </CartProvider>
+          </AuthProvider>
         </LanguageProvider>
       </body>
     </html>
