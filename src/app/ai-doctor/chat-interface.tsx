@@ -13,6 +13,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { useLanguage } from '@/context/language-context';
 
 const formSchema = z.object({
   query: z.string().min(1, 'Please enter a message.'),
@@ -26,13 +27,12 @@ type Message = {
 export function ChatInterface() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const { t } = useLanguage();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: { query: '' },
   });
-
-  const isSubmitting = form.formState.isSubmitting;
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setMessages((prev) => [...prev, { role: 'user', content: values.query }]);
@@ -53,7 +53,7 @@ export function ChatInterface() {
   return (
     <Card className="w-full">
         <CardHeader className="border-b">
-             <h2 className="text-xl font-semibold">Chat with ArogyaCare AI</h2>
+             <h2 className="text-xl font-semibold">{t('chat.title')}</h2>
         </CardHeader>
       <CardContent className="p-0">
         <ScrollArea className="h-[500px] w-full p-4">
@@ -92,7 +92,7 @@ export function ChatInterface() {
                   </Avatar>
                 <div className="bg-muted rounded-lg p-3 flex items-center space-x-2">
                     <Loader2 className="h-5 w-5 animate-spin" />
-                    <span>Thinking...</span>
+                    <span>{t('chat.thinking')}...</span>
                 </div>
               </div>
             )}
@@ -108,7 +108,7 @@ export function ChatInterface() {
               render={({ field }) => (
                 <FormItem className="flex-grow">
                   <FormControl>
-                    <Input placeholder="Ask about symptoms, diet, or general health..." {...field} disabled={isLoading} />
+                    <Input placeholder={`${t('chat.placeholder')}...`} {...field} disabled={isLoading} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

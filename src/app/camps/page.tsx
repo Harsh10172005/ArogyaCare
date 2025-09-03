@@ -1,17 +1,21 @@
+"use client";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { camps } from "@/data/camps";
 import { Stethoscope, Calendar, MapPin } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { useLanguage } from "@/context/language-context";
 
 export default function CampsPage() {
+  const { t } = useLanguage();
+
   return (
     <div className="container mx-auto px-4 py-12 md:py-20">
       <div className="text-center mb-12">
           <Stethoscope className="mx-auto h-12 w-12 text-primary" />
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mt-4">Upcoming Health Camps</h1>
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mt-4">{t('camps.title')}</h1>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-          Join our free health camps across Delhi and take a proactive step towards a healthier life.
+          {t('camps.subtitle')}
           </p>
       </div>
       <div className="max-w-4xl mx-auto">
@@ -28,7 +32,7 @@ export default function CampsPage() {
                          {camp.title}
                       </CardTitle>
                   </div>
-                   <Badge variant="secondary" className="border-primary/50 border">Free for All</Badge>
+                   <Badge variant="secondary" className="border-primary/50 border">{t('camps.freeBadge')}</Badge>
                   </div>
               </CardHeader>
               <CardContent className="space-y-3 ml-12 pl-1">
@@ -44,7 +48,7 @@ export default function CampsPage() {
               <CardFooter className="ml-12 pl-1">
                   <Button asChild>
                       <a href={camp.registrationLink} target="_blank" rel="noopener noreferrer">
-                          Register Now
+                          {t('camps.registerButton')}
                       </a>
                   </Button>
               </CardFooter>

@@ -1,0 +1,122 @@
+{
+  "header": {
+    "services": "Healthcare Services",
+    "medicines": "Medicines",
+    "hospitals": "Hospitals",
+    "healthCamps": "Health Camps",
+    "aiDoctor": "AI Doctor",
+    "offers": "Offers",
+    "search": "Search",
+    "cart": "Cart",
+    "login": "Login",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "footer": {
+    "tagline": "Your complete healthcare companion.",
+    "quickLinks": "Quick Links",
+    "medicines": "Medicines",
+    "hospitals": "Hospitals",
+    "healthCamps": "Health Camps",
+    "aiDoctor": "AI Doctor",
+    "legal": "Legal",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "followUs": "Follow Us",
+    "rights": "All rights reserved."
+  },
+  "hero": {
+    "title": "Your Health, <br /> Our Priority.",
+    "subtitle": "ArogyaCare offers a seamless healthcare experience, from ordering medicines to consulting with our AI-powered health assistant.",
+    "button": "Ask our AI Doctor"
+  },
+  "featureCards": {
+    "title": "Our Services",
+    "subtitle": "Comprehensive healthcare services at your fingertips.",
+    "orderMedicines": {
+      "title": "Order Medicines",
+      "description": "24/7 access to a wide range of medicines."
+    },
+    "nearbyHospitals": {
+      "title": "Nearby Hospitals",
+      "description": "Find emergency hospitals near your location."
+    },
+    "healthCamps": {
+      "title": "Health Camps",
+      "description": "Register for free health check-up camps."
+    },
+    "aiHealthAssistant": {
+      "title": "AI Health Assistant",
+      "description": "Get general health guidance from our AI."
+    },
+    "learnMore": "Learn More"
+  },
+  "wellness": {
+    "title": "Live a Healthier Life",
+    "subtitle": "Explore tips on nutrition, supplements, and building sustainable habits.",
+    "nutrition": {
+      "tab": "Nutrition",
+      "title": "Balanced Nutrition",
+      "description": "A balanced diet is crucial for good health and well-being. It provides your body with the energy, protein, essential fats, vitamins, and minerals to live, grow, and function properly. We provide guidance on creating a diet plan that works for you."
+    },
+    "supplements": {
+      "tab": "Supplements",
+      "title": "Essential Supplements",
+      "description": "While a healthy diet should provide most of your nutrients, sometimes supplements can help fill the gaps. From Vitamin D to Omega-3, learn about what might be beneficial for your specific health goals and needs, but always consult a doctor first."
+    },
+    "healthyHabits": {
+      "tab": "Habits",
+      "title": "Building Healthy Habits",
+      "description": "Small, consistent changes can lead to significant health improvements. We focus on key habits like regular exercise, adequate sleep, stress management, and hydration to help you build a sustainable, healthy lifestyle for the long term."
+    }
+  },
+  "testimonials": {
+    "title": "What Our Users Say",
+    "subtitle": "Real stories from people who trust ArogyaCare."
+  },
+  "login": {
+    "title": "Login",
+    "description": "Enter your email below to login to your account",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "forgotPassword": "Forgot your password?",
+    "button": "Login",
+    "signupPrompt": "Don't have an account?",
+    "signupLink": "Sign up"
+  },
+  "signup": {
+    "title": "Sign Up",
+    "description": "Create an account to get started.",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "button": "Sign Up",
+    "loginPrompt": "Already have an account?",
+    "loginLink": "Login"
+  },
+  "medicines": {
+    "title": "Order Medicines",
+    "subtitle": "Browse our wide range of medicines and get them delivered to your doorstep.",
+    "searchPlaceholder": "Search for medicines",
+    "addToCart": "Add to Cart"
+  },
+  "hospitals": {
+    "title": "Nearby Hospitals",
+    "subtitle": "Find emergency and specialized hospitals near you, equipped to provide the best care.",
+    "viewOnMap": "View on Map"
+  },
+  "camps": {
+    "title": "Upcoming Health Camps",
+    "subtitle": "Join our free health camps across Delhi and take a proactive step towards a healthier life.",
+    "freeBadge": "Free for All",
+    "registerButton": "Register Now"
+  },
+  "aiDoctor": {
+    "title": "AI Health Assistant",
+    "subtitle": "Get general health guidance from our AI. This is not a substitute for professional medical advice."
+  },
+  "chat": {
+    "title": "Chat with ArogyaCare AI",
+    "thinking": "Thinking",
+    "placeholder": "Ask about symptoms, diet, or general health"
+  }
+}

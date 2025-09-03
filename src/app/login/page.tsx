@@ -25,6 +25,7 @@ import Link from "next/link";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { signIn } from "./actions";
+import { useLanguage } from "@/context/language-context";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -38,6 +39,7 @@ const formSchema = z.object({
 export default function LoginPage() {
   const { toast } = useToast();
   const router = useRouter();
+  const { t } = useLanguage();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -65,12 +67,12 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-10rem)] py-12">
+    <div className="flex items-center justify-center min-h-[calc(100vh-10rem)] py-12 px-4">
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardTitle className="text-2xl">{t('login.title')}</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            {t('login.description')}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -81,7 +83,7 @@ export default function LoginPage() {
                 name="email"
                 render={({ field }) => (
                   <FormItem className="grid gap-2">
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>{t('login.emailLabel')}</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="m@example.com"
@@ -98,9 +100,9 @@ export default function LoginPage() {
                 render={({ field }) => (
                   <FormItem className="grid gap-2">
                      <div className="flex items-center">
-                        <FormLabel>Password</FormLabel>
+                        <FormLabel>{t('login.passwordLabel')}</FormLabel>
                         <Link href="#" className="ml-auto inline-block text-sm underline">
-                            Forgot your password?
+                            {t('login.forgotPassword')}
                         </Link>
                     </div>
                     <FormControl>
@@ -111,15 +113,15 @@ export default function LoginPage() {
                 )}
               />
               <Button type="submit" className="w-full">
-                Login
+                {t('login.button')}
               </Button>
             </form>
           </Form>
         </CardContent>
-        <CardFooter className="text-center text-sm">
-          Don't have an account?
+        <CardFooter className="text-center text-sm flex justify-center">
+          {t('login.signupPrompt')}
           <Link href="/signup" className="underline ml-1">
-            Sign up
+            {t('login.signupLink')}
           </Link>
         </CardFooter>
       </Card>

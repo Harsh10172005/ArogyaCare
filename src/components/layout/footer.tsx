@@ -1,7 +1,10 @@
+"use client";
 import Link from "next/link";
-import Image from "next/image";
+import { useLanguage } from "@/context/language-context";
 
 export default function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-muted text-muted-foreground">
       <div className="container py-12 text-center">
@@ -10,26 +13,26 @@ export default function Footer() {
             <Link href="/" className="mb-4 inline-block text-xl font-bold text-primary">
                 ArogyaCare
             </Link>
-            <p className="text-sm">Your complete healthcare companion.</p>
+            <p className="text-sm">{t('footer.tagline')}</p>
           </div>
           <div className="md:text-left md:pl-8">
-            <h3 className="font-semibold text-foreground mb-4">Quick Links</h3>
+            <h3 className="font-semibold text-foreground mb-4">{t('footer.quickLinks')}</h3>
             <ul className="space-y-2">
-              <li><Link href="/medicines" className="hover:text-primary transition-colors">Medicines</Link></li>
-              <li><Link href="/hospitals" className="hover:text-primary transition-colors">Hospitals</Link></li>
-              <li><Link href="/camps" className="hover:text-primary transition-colors">Health Camps</Link></li>
-              <li><Link href="/ai-doctor" className="hover:text-primary transition-colors">AI Doctor</Link></li>
+              <li><Link href="/medicines" className="hover:text-primary transition-colors">{t('footer.medicines')}</Link></li>
+              <li><Link href="/hospitals" className="hover:text-primary transition-colors">{t('footer.hospitals')}</Link></li>
+              <li><Link href="/camps" className="hover:text-primary transition-colors">{t('footer.healthCamps')}</Link></li>
+              <li><Link href="/ai-doctor" className="hover:text-primary transition-colors">{t('footer.aiDoctor')}</Link></li>
             </ul>
           </div>
           <div className="md:text-left md:pl-8">
-            <h3 className="font-semibold text-foreground mb-4">Legal</h3>
+            <h3 className="font-semibold text-foreground mb-4">{t('footer.legal')}</h3>
             <ul className="space-y-2">
-              <li><Link href="#" className="hover:text-primary transition-colors">Terms of Service</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
+              <li><Link href="#" className="hover:text-primary transition-colors">{t('footer.terms')}</Link></li>
+              <li><Link href="#" className="hover:text-primary transition-colors">{t('footer.privacy')}</Link></li>
             </ul>
           </div>
           <div className="md:text-left md:pl-8">
-            <h3 className="font-semibold text-foreground mb-4">Follow Us</h3>
+            <h3 className="font-semibold text-foreground mb-4">{t('footer.followUs')}</h3>
             <ul className="space-y-2">
               <li><Link href="#" className="hover:text-primary transition-colors">Facebook</Link></li>
               <li><Link href="#" className="hover:text-primary transition-colors">Twitter</Link></li>
@@ -38,7 +41,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-12 border-t pt-8 text-sm">
-          <p>&copy; {new Date().getFullYear()} ArogyaCare. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} ArogyaCare. {t('footer.rights')}</p>
         </div>
       </div>
     </footer>
