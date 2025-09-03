@@ -15,7 +15,8 @@ import {
   X,
   Languages,
   ChefHat,
-  LogOut
+  LogOut,
+  History
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -24,6 +25,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 import { useState, useContext } from "react";
@@ -90,6 +92,13 @@ export default function Header() {
                     </Link>
                   </DropdownMenuItem>
                 ))}
+                <DropdownMenuSeparator />
+                 <DropdownMenuItem asChild>
+                    <Link href="/order-history" className="flex items-center gap-2">
+                      <History className="h-4 w-4" />
+                      Order History
+                    </Link>
+                  </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
             <Link href="#" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
@@ -185,6 +194,17 @@ export default function Header() {
                     {t(link.labelKey)}
                   </Link>
                 ))}
+                 <Link
+                    href="/order-history"
+                    onClick={() => setSheetOpen(false)}
+                    className={cn(
+                      "flex items-center gap-3 rounded-md p-2 text-lg font-medium transition-colors hover:bg-accent hover:text-accent-foreground",
+                      pathname === "/order-history" ? "bg-accent text-accent-foreground" : "text-muted-foreground"
+                    )}
+                  >
+                    <History className="h-5 w-5" />
+                    Order History
+                  </Link>
                  <Link
                     href="#"
                     onClick={() => setSheetOpen(false)}
