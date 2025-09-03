@@ -1,4 +1,3 @@
-// There is no file at this path.
 "use client";
 import { ChatInterface } from "./chat-interface";
 import { Bot } from "lucide-react";

@@ -1,5 +1,6 @@
 'use server';
 import { chat } from '@/ai/flows/chat-flow';
+import { diagnoseSkin, type SkinDiagnosisInput, type SkinDiagnosisOutput } from '@/ai/flows/skin-diagnosis-flow';
 
 export async function getAIResponse(query: string): Promise<{ response?: string; error?: string }> {
   if (!query || query.trim().length === 0) {
@@ -11,7 +12,21 @@ export async function getAIResponse(query: string): Promise<{ response?: string;
     return { response: result.response };
   } catch (error: any) {
     console.error('Error calling chat flow from action:', error);
-    // Return a more specific error message to the client
+    return { error: `AI service failed: ${error.message}. Please try again.` };
+  }
+}
+
+export async function getSkinDiagnosis(input: SkinDiagnosisInput): Promise<{ response?: SkinDiagnosisOutput; error?: string }> {
+  if (!input.photoDataUri) {
+    return { error: 'Please upload an image.' };
+  }
+  
+  try {
+    const result = await diagnoseSkin(input);
+    return { response: result };
+  } catch (error: any)
+  {
+    console.error('Error calling skin diagnosis flow from action:', error);
     return { error: `AI service failed: ${error.message}. Please try again.` };
   }
 }
