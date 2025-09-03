@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { getAIResponse, getSkinDiagnosis } from './actions';
-import type { SkinDiagnosisOutput } from './actions';
+import type { SkinDiagnosisOutput } from './schema';
 import { Send, User, Bot, Loader2, Image as ImageIcon, X, AlertTriangle, Lightbulb } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
