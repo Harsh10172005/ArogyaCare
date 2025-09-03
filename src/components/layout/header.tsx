@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -13,6 +14,7 @@ import {
   Bot,
   X,
   Languages,
+  ChefHat
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -44,6 +46,7 @@ export default function Header() {
     { href: "/hospitals", labelKey: "hospitals", icon: Hospital },
     { href: "/camps", labelKey: "healthCamps", icon: Stethoscope },
     { href: "/ai-doctor", labelKey: "aiDoctor", icon: Bot },
+    { href: "/diet-planner", labelKey: "dietPlanner", icon: ChefHat },
   ];
 
   const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {

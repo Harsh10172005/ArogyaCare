@@ -1,7 +1,8 @@
+
 "use client";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Pill, Hospital, Stethoscope, Bot, ArrowRight } from "lucide-react";
+import { Pill, Hospital, Stethoscope, Bot, ArrowRight, ChefHat } from "lucide-react";
 import { useContext } from "react";
 import { LanguageContext } from "@/context/language-context";
 
@@ -21,10 +22,10 @@ export default function FeatureCards() {
       icon: Hospital,
     },
     {
-      titleKey: "healthCamps",
-      descriptionKey: "healthCampsDesc",
-      href: "/camps",
-      icon: Stethoscope,
+      titleKey: "dietPlanner",
+      descriptionKey: "dietPlannerDescShort",
+      href: "/diet-planner",
+      icon: ChefHat,
     },
     {
       titleKey: "aiHealthAssistant",
