@@ -40,7 +40,7 @@ export default function CheckoutPage() {
   function onSubmit(values: CheckoutFormValues) {
     console.log('Order placed with details:', values);
     toast({
-      title: t('orderPlacedSuccessTitle'),
+      title: `${t('orderPlacedSuccessTitle')} ${values.name}!`,
       description: t('orderPlacedSuccessDesc'),
     });
     clearCart();
