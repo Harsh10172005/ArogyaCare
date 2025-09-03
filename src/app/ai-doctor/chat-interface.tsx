@@ -9,13 +9,13 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { getAIResponse, getSkinDiagnosis } from './actions';
+import type { SkinDiagnosisOutput } from './actions';
 import { Send, User, Bot, Loader2, Image as ImageIcon, X, AlertTriangle, Lightbulb } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { LanguageContext } from '@/context/language-context';
-import type { SkinDiagnosisOutput } from '@/ai/flows/skin-diagnosis-flow';
 import Image from 'next/image';
 import { useToast } from '@/hooks/use-toast';
 
