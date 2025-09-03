@@ -1,51 +1,21 @@
 
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
+import dynamic from 'next/dynamic';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { hospitals } from "@/data/hospitals";
 import { Hospital, MapPin, Phone } from "lucide-react";
 import { LanguageContext } from "@/context/language-context";
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
-
-// Fix for default marker icon issue with webpack
-const markerIcon = new L.Icon({
-    iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-    iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-});
-
-// Moved HospitalMap outside the HospitalsPage component
-const HospitalMap = () => {
-    const { t } = useContext(LanguageContext);
-    const defaultPosition: [number, number] = [28.6139, 77.2090]; // Delhi coordinates
-
-    return (
-        <MapContainer center={defaultPosition} zoom={11} scrollWheelZoom={false} style={{ height: '400px', width: '100%', borderRadius: '0.5rem', marginBottom: '2rem', zIndex: 0 }}>
-            <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            {hospitals.map(hospital => (
-                <Marker key={hospital.id} position={[hospital.latitude, hospital.longitude]} icon={markerIcon}>
-                    <Popup>
-                        <b>{hospital.name}</b><br />
-                        {hospital.address}
-                    </Popup>
-                </Marker>
-            ))}
-        </MapContainer>
-    );
-};
 
 export default function HospitalsPage() {
   const { t } = useContext(LanguageContext);
+
+  const HospitalMap = useMemo(() => dynamic(() => import('@/components/hospitals/hospital-map'), { 
+    loading: () => <div className="h-[400px] w-full rounded-md bg-muted flex items-center justify-center"><p>Loading map...</p></div>,
+    ssr: false 
+  }), []);
+
   return (
     <div className="container mx-auto px-4 py-12 md:py-20">
       <div className="text-center mb-12">
