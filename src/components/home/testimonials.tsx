@@ -10,15 +10,18 @@ import {
 } from "@/components/ui/carousel"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { testimonials } from "@/data/testimonials"
+import { useContext } from "react"
+import { LanguageContext } from "@/context/language-context"
 
 export default function Testimonials() {
+  const { language, t } = useContext(LanguageContext);
   return (
     <section className="w-full py-16 sm:py-24 bg-background">
       <div className="container mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">What Our Users Say</h2>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">{t('testimonialsTitle')}</h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Real stories from people who trust ArogyaCare.
+            {t('testimonialsDesc')}
           </p>
         </div>
         <Carousel
@@ -34,7 +37,7 @@ export default function Testimonials() {
                 <div className="p-1 h-full">
                   <Card className="h-full flex flex-col">
                     <CardContent className="flex flex-col items-center text-center p-6 flex-grow">
-                      <p className="text-muted-foreground mb-6 flex-grow">"{testimonial.testimonial.en}"</p>
+                      <p className="text-muted-foreground mb-6 flex-grow">"{testimonial.testimonial[language as keyof typeof testimonial.testimonial]}"</p>
                       <Avatar className="mb-4 h-16 w-16">
                         <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint="happy person" />
                         <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>

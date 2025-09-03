@@ -12,6 +12,7 @@ import {
   Stethoscope,
   Bot,
   X,
+  Languages,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -22,19 +23,21 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { LanguageContext } from "@/context/language-context";
 
 export default function Header() {
   const [isSheetOpen, setSheetOpen] = useState(false);
   const pathname = usePathname();
+  const { language, setLanguage, t } = useContext(LanguageContext);
 
   const navLinks = [
-    { href: "/medicines", label: "Medicines", icon: Pill },
-    { href: "/hospitals", label: "Hospitals", icon: Hospital },
-    { href: "/camps", label: "Health Camps", icon: Stethoscope },
-    { href: "/ai-doctor", label: "AI Doctor", icon: Bot },
+    { href: "/medicines", labelKey: "medicines", icon: Pill },
+    { href: "/hospitals", labelKey: "hospitals", icon: Hospital },
+    { href: "/camps", labelKey: "healthCamps", icon: Stethoscope },
+    { href: "/ai-doctor", labelKey: "aiDoctor", icon: Bot },
   ];
 
   return (
@@ -50,7 +53,7 @@ export default function Header() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="text-sm font-medium">
-                  Healthcare Services <ChevronDown className="ml-2 h-4 w-4" />
+                  {t('healthcareServices')} <ChevronDown className="ml-2 h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start">
@@ -58,14 +61,14 @@ export default function Header() {
                   <DropdownMenuItem key={link.href} asChild>
                     <Link href={link.href} className="flex items-center gap-2">
                       <link.icon className="h-4 w-4" />
-                      {link.label}
+                      {t(link.labelKey)}
                     </Link>
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuContent>
             </DropdownMenu>
             <Link href="#" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
-              Offers
+              {t('offers')}
             </Link>
           </nav>
         </div>
@@ -73,14 +76,29 @@ export default function Header() {
         <div className="hidden md:flex items-center gap-2">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input type="search" placeholder="Search..." className="w-48 pl-10" />
+            <Input type="search" placeholder={`${t('search')}...`} className="w-48 pl-10" />
           </div>
+          <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Languages className="h-5 w-5" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onSelect={() => setLanguage('en')} disabled={language === 'en'}>
+                  English
+                </DropdownMenuItem>
+                <DropdownMenuItem onSelect={() => setLanguage('hi')} disabled={language === 'hi'}>
+                  हिन्दी
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           <Button variant="ghost" size="icon">
             <ShoppingCart className="h-5 w-5" />
             <span className="sr-only">Cart</span>
           </Button>
           <Button asChild>
-            <Link href="/login">Login</Link>
+            <Link href="/login">{t('login')}</Link>
           </Button>
         </div>
 
@@ -117,7 +135,7 @@ export default function Header() {
                     )}
                   >
                     <link.icon className="h-5 w-5" />
-                    {link.label}
+                    {t(link.labelKey)}
                   </Link>
                 ))}
                  <Link
@@ -125,11 +143,26 @@ export default function Header() {
                     onClick={() => setSheetOpen(false)}
                     className="flex items-center gap-3 rounded-md p-2 text-lg font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
                   >
-                    Offers
+                    {t('offers')}
                   </Link>
               </nav>
               <div className="mt-auto p-4 border-t flex flex-col gap-4">
-                <Button asChild><Link href="/login" onClick={() => setSheetOpen(false)}>Login</Link></Button>
+                 <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" className="w-full">
+                       <Languages className="mr-2 h-5 w-5" /> {language === 'en' ? 'English' : 'हिन्दी'}
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="center" className="w-[calc(100%-2rem)]">
+                    <DropdownMenuItem onSelect={() => setLanguage('en')} disabled={language === 'en'}>
+                      English
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onSelect={() => setLanguage('hi')} disabled={language === 'hi'}>
+                      हिन्दी
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+                <Button asChild><Link href="/login" onClick={() => setSheetOpen(false)}>{t('login')}</Link></Button>
                 <Button variant="ghost" size="icon" className="self-center">
                     <ShoppingCart className="h-6 w-6" />
                     <span className="sr-only">Cart</span>

@@ -25,6 +25,8 @@ import Link from "next/link";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { signUp } from "./actions";
+import { useContext } from "react";
+import { LanguageContext } from "@/context/language-context";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -38,6 +40,7 @@ const formSchema = z.object({
 export default function SignUpPage() {
   const { toast } = useToast();
   const router = useRouter();
+  const { t } = useContext(LanguageContext);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -51,14 +54,14 @@ export default function SignUpPage() {
     const result = await signUp(values);
     if (result.error) {
       toast({
-        title: "Error",
+        title: t('error'),
         description: result.error,
         variant: "destructive",
       });
     } else {
       toast({
-        title: "Success",
-        description: "Account created successfully! Please log in.",
+        title: t('success'),
+        description: t('accountCreatedSuccess'),
       });
       router.push("/login");
     }
@@ -68,9 +71,9 @@ export default function SignUpPage() {
     <div className="flex items-center justify-center min-h-[calc(100vh-10rem)] py-12 px-4">
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl">Sign Up</CardTitle>
+          <CardTitle className="text-2xl">{t('signUp')}</CardTitle>
           <CardDescription>
-            Create an account to get started.
+            {t('signUpDesc')}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -81,7 +84,7 @@ export default function SignUpPage() {
                 name="email"
                 render={({ field }) => (
                   <FormItem className="grid gap-2">
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>{t('email')}</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="m@example.com"
@@ -97,7 +100,7 @@ export default function SignUpPage() {
                 name="password"
                 render={({ field }) => (
                   <FormItem className="grid gap-2">
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel>{t('password')}</FormLabel>
                     <FormControl>
                       <Input type="password" {...field} />
                     </FormControl>
@@ -106,15 +109,15 @@ export default function SignUpPage() {
                 )}
               />
               <Button type="submit" className="w-full">
-                Sign Up
+                {t('signUp')}
               </Button>
             </form>
           </Form>
         </CardContent>
         <CardFooter className="text-center text-sm flex justify-center">
-          Already have an account?
+          {t('alreadyHaveAccount')}
           <Link href="/login" className="underline ml-1">
-            Login
+            {t('login')}
           </Link>
         </CardFooter>
       </Card>

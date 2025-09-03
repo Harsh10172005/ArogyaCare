@@ -4,15 +4,18 @@ import { Button } from "@/components/ui/button";
 import { camps } from "@/data/camps";
 import { Stethoscope, Calendar, MapPin } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { useContext } from "react";
+import { LanguageContext } from "@/context/language-context";
 
 export default function CampsPage() {
+  const { t } = useContext(LanguageContext);
   return (
     <div className="container mx-auto px-4 py-12 md:py-20">
       <div className="text-center mb-12">
           <Stethoscope className="mx-auto h-12 w-12 text-primary" />
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mt-4">Upcoming Health Camps</h1>
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mt-4">{t('campsTitle')}</h1>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Join our free health camps across Delhi and take a proactive step towards a healthier life.
+            {t('campsDesc')}
           </p>
       </div>
       <div className="max-w-4xl mx-auto">
@@ -26,16 +29,16 @@ export default function CampsPage() {
                           <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
                               <Stethoscope className="h-6 w-6" />
                           </span>
-                         {camp.title}
+                         {t(camp.title)}
                       </CardTitle>
                   </div>
-                   <Badge variant="secondary" className="border-primary/50 border">Free for All</Badge>
+                   <Badge variant="secondary" className="border-primary/50 border">{t('freeForAll')}</Badge>
                   </div>
               </CardHeader>
               <CardContent className="space-y-3 ml-12 pl-1">
                   <div className="flex items-center text-muted-foreground">
                   <MapPin className="h-4 w-4 mr-2" />
-                  <p>{camp.location}</p>
+                  <p>{t(camp.location)}</p>
                   </div>
                   <div className="flex items-center text-muted-foreground">
                   <Calendar className="h-4 w-4 mr-2" />
@@ -45,7 +48,7 @@ export default function CampsPage() {
               <CardFooter className="ml-12 pl-1">
                   <Button asChild>
                       <a href={camp.registrationLink} target="_blank" rel="noopener noreferrer">
-                          Register Now
+                          {t('registerNow')}
                       </a>
                   </Button>
               </CardFooter>

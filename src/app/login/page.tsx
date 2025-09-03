@@ -25,6 +25,8 @@ import Link from "next/link";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { signIn } from "./actions";
+import { useContext } from "react";
+import { LanguageContext } from "@/context/language-context";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -38,6 +40,7 @@ const formSchema = z.object({
 export default function LoginPage() {
   const { toast } = useToast();
   const router = useRouter();
+  const { t } = useContext(LanguageContext);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -51,14 +54,14 @@ export default function LoginPage() {
     const result = await signIn(values);
     if (result.error) {
       toast({
-        title: "Error",
+        title: t('error'),
         description: result.error,
         variant: "destructive",
       });
     } else {
       toast({
-        title: "Success",
-        description: "Logged in successfully!",
+        title: t('success'),
+        description: t('loggedInSuccess'),
       });
       router.push("/");
     }
@@ -68,9 +71,9 @@ export default function LoginPage() {
     <div className="flex items-center justify-center min-h-[calc(100vh-10rem)] py-12 px-4">
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardTitle className="text-2xl">{t('login')}</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            {t('loginDesc')}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -81,7 +84,7 @@ export default function LoginPage() {
                 name="email"
                 render={({ field }) => (
                   <FormItem className="grid gap-2">
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>{t('email')}</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="m@example.com"
@@ -98,9 +101,9 @@ export default function LoginPage() {
                 render={({ field }) => (
                   <FormItem className="grid gap-2">
                      <div className="flex items-center">
-                        <FormLabel>Password</FormLabel>
+                        <FormLabel>{t('password')}</FormLabel>
                         <Link href="#" className="ml-auto inline-block text-sm underline">
-                            Forgot your password?
+                            {t('forgotPassword')}
                         </Link>
                     </div>
                     <FormControl>
@@ -111,15 +114,15 @@ export default function LoginPage() {
                 )}
               />
               <Button type="submit" className="w-full">
-                Login
+                {t('login')}
               </Button>
             </form>
           </Form>
         </CardContent>
         <CardFooter className="text-center text-sm flex justify-center">
-          Don't have an account?
+          {t('dontHaveAccount')}
           <Link href="/signup" className="underline ml-1">
-            Sign up
+            {t('signUp')}
           </Link>
         </CardFooter>
       </Card>
