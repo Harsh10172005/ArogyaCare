@@ -31,7 +31,7 @@ export default function RootLayout({
         <LanguageProvider>
           <CartProvider>
             <Header />
-            <main className="flex-grow">
+            <main className="flex-grow animate-fade-in">
               {children}
             </main>
             <Footer />
