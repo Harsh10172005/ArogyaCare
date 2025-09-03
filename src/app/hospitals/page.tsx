@@ -1,3 +1,4 @@
+
 "use client";
 import React, { useContext } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -20,11 +21,13 @@ const markerIcon = new L.Icon({
     shadowSize: [41, 41]
 });
 
+// Moved HospitalMap outside the HospitalsPage component
 const HospitalMap = () => {
+    const { t } = useContext(LanguageContext);
     const defaultPosition: [number, number] = [28.6139, 77.2090]; // Delhi coordinates
 
     return (
-        <MapContainer center={defaultPosition} zoom={11} scrollWheelZoom={false} style={{ height: '400px', width: '100%', borderRadius: '0.5rem', marginBottom: '2rem' }}>
+        <MapContainer center={defaultPosition} zoom={11} scrollWheelZoom={false} style={{ height: '400px', width: '100%', borderRadius: '0.5rem', marginBottom: '2rem', zIndex: 0 }}>
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -40,7 +43,6 @@ const HospitalMap = () => {
         </MapContainer>
     );
 };
-
 
 export default function HospitalsPage() {
   const { t } = useContext(LanguageContext);
