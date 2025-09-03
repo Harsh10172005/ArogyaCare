@@ -7,15 +7,18 @@ import { Input } from "@/components/ui/input";
 import { useContext } from "react";
 import { LanguageContext } from "@/context/language-context";
 import { useToast } from "@/hooks/use-toast";
+import { CartContext, type CartItem } from "@/context/cart-context";
 
 export default function MedicinesPage() {
   const { t } = useContext(LanguageContext);
   const { toast } = useToast();
+  const { addToCart } = useContext(CartContext);
 
-  const handleAddToCart = (medicineName: string) => {
+  const handleAddToCart = (medicine: CartItem) => {
+    addToCart(medicine);
     toast({
       title: t('success'),
-      description: `${medicineName} ${t('addedToCart')}`,
+      description: `${medicine.name} ${t('addedToCart')}`,
     });
   };
 
@@ -49,7 +52,7 @@ export default function MedicinesPage() {
               </CardContent>
               <CardFooter className="flex justify-between items-center">
               <p className="text-xl font-bold text-primary">₹{medicine.price.toFixed(2)}</p>
-              <Button onClick={() => handleAddToCart(medicine.name)}>
+              <Button onClick={() => handleAddToCart({ ...medicine, quantity: 1 })}>
                   <ShoppingCart className="mr-2 h-4 w-4" /> {t('addToCart')}
               </Button>
               </CardFooter>

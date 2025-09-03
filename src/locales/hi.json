@@ -90,5 +90,11 @@
     "signUp": "साइन अप करें",
     "accountCreatedSuccess": "खाता सफलतापूर्वक बन गया! कृपया लॉग इन करें।",
     "signUpDesc": "आरंभ करने के लिए एक खाता बनाएं।",
-    "alreadyHaveAccount": "पहले से ही एक खाता है?"
+    "alreadyHaveAccount": "पहले से ही एक खाता है?",
+    "yourCart": "आपका कार्ट",
+    "cartIsEmpty": "आपका कार्ट खाली है",
+    "cartIsEmptyDesc": "यहां देखने के लिए दवाएं जोड़ना शुरू करें।",
+    "total": "कुल",
+    "checkout": "चेकआउट के लिए आगे बढ़ें",
+    "clearCart": "कार्ट साफ़ करें"
 }

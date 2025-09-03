@@ -27,11 +27,15 @@ import { useState, useContext } from "react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { LanguageContext } from "@/context/language-context";
+import { CartSheet } from "./cart-sheet";
+import { CartContext } from "@/context/cart-context";
+import { Badge } from "../ui/badge";
 
 export default function Header() {
   const [isSheetOpen, setSheetOpen] = useState(false);
   const pathname = usePathname();
   const { language, setLanguage, t } = useContext(LanguageContext);
+  const { cart } = useContext(CartContext);
 
   const navLinks = [
     { href: "/medicines", labelKey: "medicines", icon: Pill },
@@ -42,7 +46,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
+      <div className="container flex h-16 items-center justify-between px-4 md:px-6">
         <div className="flex items-center gap-6">
           <Link href="/" className="flex items-center gap-2 text-xl font-bold text-primary p-2">
             <Image src="https://i.postimg.cc/TYGz1K8b/arogya_care.png" alt="ArogyaCare Logo" width={32} height={32} />
@@ -93,10 +97,17 @@ export default function Header() {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-          <Button variant="ghost" size="icon">
-            <ShoppingCart className="h-5 w-5" />
-            <span className="sr-only">Cart</span>
-          </Button>
+            <CartSheet>
+              <Button variant="ghost" size="icon" className="relative">
+                {cart.length > 0 && (
+                  <Badge variant="destructive" className="absolute -top-1 -right-1 h-4 w-4 justify-center p-0 text-xs">
+                    {cart.length}
+                  </Badge>
+                )}
+                <ShoppingCart className="h-5 w-5" />
+                <span className="sr-only">Cart</span>
+              </Button>
+            </CartSheet>
           <Button asChild>
             <Link href="/login">{t('login')}</Link>
           </Button>
@@ -109,7 +120,7 @@ export default function Header() {
               <span className="sr-only">Open menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-full max-w-sm">
+          <SheetContent side="left" className="w-full max-w-sm p-0">
             <div className="flex flex-col h-full">
               <div className="flex items-center justify-between p-4 border-b">
                  <Link href="/" onClick={() => setSheetOpen(false)} className="flex items-center gap-2 text-xl font-bold text-primary">
@@ -163,10 +174,17 @@ export default function Header() {
                   </DropdownMenuContent>
                 </DropdownMenu>
                 <Button asChild><Link href="/login" onClick={() => setSheetOpen(false)}>{t('login')}</Link></Button>
-                <Button variant="ghost" size="icon" className="self-center">
-                    <ShoppingCart className="h-6 w-6" />
-                    <span className="sr-only">Cart</span>
-                </Button>
+                <CartSheet>
+                   <Button variant="outline" className="relative">
+                      {cart.length > 0 && (
+                        <Badge variant="destructive" className="absolute -top-2 -right-2 h-5 w-5 justify-center p-0 text-xs">
+                          {cart.length}
+                        </Badge>
+                      )}
+                      <ShoppingCart className="mr-2 h-5 w-5" />
+                      {t('yourCart')}
+                    </Button>
+                </CartSheet>
               </div>
             </div>
           </SheetContent>

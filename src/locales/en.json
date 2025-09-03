@@ -90,5 +90,11 @@
     "signUp": "Sign up",
     "accountCreatedSuccess": "Account created successfully! Please log in.",
     "signUpDesc": "Create an account to get started.",
-    "alreadyHaveAccount": "Already have an account?"
+    "alreadyHaveAccount": "Already have an account?",
+    "yourCart": "Your Cart",
+    "cartIsEmpty": "Your cart is empty",
+    "cartIsEmptyDesc": "Start adding medicines to see them here.",
+    "total": "Total",
+    "checkout": "Proceed to Checkout",
+    "clearCart": "Clear Cart"
 }

@@ -6,6 +6,7 @@ import Footer from '@/components/layout/footer';
 import { cn } from '@/lib/utils';
 import { Poppins } from 'next/font/google';
 import { LanguageProvider } from '@/context/language-context';
+import { CartProvider } from '@/context/cart-context';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -26,12 +27,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(poppins.className, "min-h-screen bg-background font-sans antialiased")}>
         <LanguageProvider>
-          <Header />
-          <main className="flex-grow">
-            {children}
-          </main>
-          <Footer />
-          <Toaster />
+          <CartProvider>
+            <Header />
+            <main className="flex-grow">
+              {children}
+            </main>
+            <Footer />
+            <Toaster />
+          </CartProvider>
         </LanguageProvider>
       </body>
     </html>
