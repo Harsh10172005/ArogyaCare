@@ -6,11 +6,11 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import { hospitals } from '@/data/hospitals';
 
-// Fix for default marker icon issue with webpack
+// Fix for default marker icon issue with webpack. This needs to be defined outside the component.
 const markerIcon = new L.Icon({
-    iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-    iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+    iconUrl: "/marker-icon.png",
+    iconRetinaUrl: "/marker-icon-2x.png",
+    shadowUrl: "/marker-shadow.png",
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
@@ -19,6 +19,10 @@ const markerIcon = new L.Icon({
 
 const HospitalMap = () => {
     const defaultPosition: [number, number] = [28.6139, 77.2090]; // Delhi coordinates
+
+    if (typeof window === 'undefined') {
+        return null;
+    }
 
     return (
         <MapContainer center={defaultPosition} zoom={11} scrollWheelZoom={false} style={{ height: '400px', width: '100%', borderRadius: '0.5rem', marginBottom: '2rem', zIndex: 0 }}>

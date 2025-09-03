@@ -11,10 +11,14 @@ import { LanguageContext } from "@/context/language-context";
 export default function HospitalsPage() {
   const { t } = useContext(LanguageContext);
 
-  const HospitalMap = useMemo(() => dynamic(() => import('@/components/hospitals/hospital-map'), { 
-    loading: () => <div className="h-[400px] w-full rounded-md bg-muted flex items-center justify-center"><p>Loading map...</p></div>,
-    ssr: false 
-  }), []);
+  // Stably import the map component using useMemo to prevent re-initialization on re-renders.
+  const HospitalMap = useMemo(() => dynamic(
+    () => import('@/components/hospitals/hospital-map'),
+    { 
+      loading: () => <div className="h-[400px] w-full rounded-md bg-muted flex items-center justify-center"><p>Loading map...</p></div>,
+      ssr: false 
+    }
+  ), []);
 
   return (
     <div className="container mx-auto px-4 py-12 md:py-20">
