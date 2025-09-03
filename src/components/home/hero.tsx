@@ -2,27 +2,23 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Heart } from "lucide-react";
-import { useLanguage } from "@/context/language-context";
 
 
 export default function Hero() {
-  const { t } = useLanguage();
-
   return (
     <section className="w-full bg-secondary">
       <div className="container mx-auto grid md:grid-cols-2 gap-16 items-center py-24 sm:py-32">
         <div className="space-y-6 text-center md:text-left">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground tracking-tighter"
-            dangerouslySetInnerHTML={{ __html: t('hero.title') }}
-          >
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground tracking-tighter">
+            Your Health, <br /> Our Priority.
           </h1>
           <p className="max-w-xl mx-auto md:mx-0 text-lg lg:text-xl text-muted-foreground">
-            {t('hero.subtitle')}
+            ArogyaCare offers a seamless healthcare experience, from ordering medicines to consulting with our AI-powered health assistant.
           </p>
           <div className="flex justify-center md:justify-start">
             <Button asChild size="lg">
               <Link href="/ai-doctor">
-                {t('hero.button')} <ArrowRight className="ml-2 h-5 w-5" />
+                Ask our AI Doctor <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
           </div>

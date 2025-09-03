@@ -25,7 +25,6 @@ import Link from "next/link";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { signUp } from "./actions";
-import { useLanguage } from "@/context/language-context";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -39,7 +38,6 @@ const formSchema = z.object({
 export default function SignUpPage() {
   const { toast } = useToast();
   const router = useRouter();
-  const { t } = useLanguage();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -70,9 +68,9 @@ export default function SignUpPage() {
     <div className="flex items-center justify-center min-h-[calc(100vh-10rem)] py-12 px-4">
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl">{t('signup.title')}</CardTitle>
+          <CardTitle className="text-2xl">Sign Up</CardTitle>
           <CardDescription>
-            {t('signup.description')}
+            Create an account to get started.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -83,7 +81,7 @@ export default function SignUpPage() {
                 name="email"
                 render={({ field }) => (
                   <FormItem className="grid gap-2">
-                    <FormLabel>{t('signup.emailLabel')}</FormLabel>
+                    <FormLabel>Email</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="m@example.com"
@@ -99,7 +97,7 @@ export default function SignUpPage() {
                 name="password"
                 render={({ field }) => (
                   <FormItem className="grid gap-2">
-                    <FormLabel>{t('signup.passwordLabel')}</FormLabel>
+                    <FormLabel>Password</FormLabel>
                     <FormControl>
                       <Input type="password" {...field} />
                     </FormControl>
@@ -108,15 +106,15 @@ export default function SignUpPage() {
                 )}
               />
               <Button type="submit" className="w-full">
-                {t('signup.button')}
+                Sign Up
               </Button>
             </form>
           </Form>
         </CardContent>
         <CardFooter className="text-center text-sm flex justify-center">
-          {t('signup.loginPrompt')}
+          Already have an account?
           <Link href="/login" className="underline ml-1">
-            {t('signup.loginLink')}
+            Login
           </Link>
         </CardFooter>
       </Card>

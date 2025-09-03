@@ -2,33 +2,30 @@
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Pill, Hospital, Stethoscope, Bot, ArrowRight } from "lucide-react";
-import { useLanguage } from "@/context/language-context";
 
 export default function FeatureCards() {
-  const { t } = useLanguage();
-
   const features = [
     {
-      title: t('featureCards.orderMedicines.title'),
-      description: t('featureCards.orderMedicines.description'),
+      title: "Order Medicines",
+      description: "24/7 access to a wide range of medicines.",
       href: "/medicines",
       icon: Pill,
     },
     {
-      title: t('featureCards.nearbyHospitals.title'),
-      description: t('featureCards.nearbyHospitals.description'),
+      title: "Nearby Hospitals",
+      description: "Find emergency hospitals near your location.",
       href: "/hospitals",
       icon: Hospital,
     },
     {
-      title: t('featureCards.healthCamps.title'),
-      description: t('featureCards.healthCamps.description'),
+      title: "Health Camps",
+      description: "Register for free health check-up camps.",
       href: "/camps",
       icon: Stethoscope,
     },
     {
-      title: t('featureCards.aiHealthAssistant.title'),
-      description: t('featureCards.aiHealthAssistant.description'),
+      title: "AI Health Assistant",
+      description: "Get general health guidance from our AI.",
       href: "/ai-doctor",
       icon: Bot,
     },
@@ -38,9 +35,9 @@ export default function FeatureCards() {
     <section className="w-full py-16 sm:py-24 bg-background">
       <div className="container mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">{t('featureCards.title')}</h2>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Our Services</h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            {t('featureCards.subtitle')}
+            Comprehensive healthcare services at your fingertips.
           </p>
         </div>
         <div className="max-w-5xl mx-auto">
@@ -55,7 +52,7 @@ export default function FeatureCards() {
                   <CardContent>
                     <p className="text-muted-foreground">{feature.description}</p>
                     <div className="flex items-center mt-4 font-semibold text-primary group-hover:text-accent-foreground transition-colors">
-                      {t('featureCards.learnMore')} <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform"/>
+                      Learn More <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform"/>
                     </div>
                   </CardContent>
                 </Card>

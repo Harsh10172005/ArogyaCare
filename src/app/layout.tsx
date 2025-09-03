@@ -5,7 +5,6 @@ import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { cn } from '@/lib/utils';
 import { Poppins } from 'next/font/google';
-import { LanguageProvider } from '@/context/language-context';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -25,14 +24,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(poppins.className, "min-h-screen bg-background font-sans antialiased")}>
-        <LanguageProvider>
           <Header />
-          <main className="flex-grow container mx-auto">
+          <main className="flex-grow">
             {children}
           </main>
           <Footer />
           <Toaster />
-        </LanguageProvider>
       </body>
     </html>
   );
