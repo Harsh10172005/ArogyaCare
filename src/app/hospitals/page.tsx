@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { hospitals } from "@/data/hospitals";
 import { Hospital, MapPin, Phone } from "lucide-react";
 import { LanguageContext } from "@/context/language-context";
+import { Badge } from "@/components/ui/badge";
 
 export default function HospitalsPage() {
   const { t } = useContext(LanguageContext);
@@ -32,8 +33,10 @@ export default function HospitalsPage() {
                       </span>
                       {hospital.name}
                   </CardTitle>
-                  <p className="text-sm bg-primary/10 text-primary font-semibold inline-block px-3 py-1 rounded-full mt-3 ml-12">{t(hospital.type)}</p>
                 </div>
+                <Badge variant="secondary" className="border-primary/50 border text-base">
+                  {t(hospital.type)}
+                </Badge>
               </CardHeader>
               <CardContent className="ml-12 pl-1 pt-0">
                 <div className="flex items-center text-muted-foreground">
