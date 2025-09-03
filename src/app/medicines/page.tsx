@@ -1,10 +1,10 @@
 "use client";
+import { useState, useEffect, useContext } from "react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { medicines } from "@/data/medicines";
 import { Pill, ShoppingCart, Search, Package } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { useContext } from "react";
 import { LanguageContext } from "@/context/language-context";
 import { useToast } from "@/hooks/use-toast";
 import { CartContext, type CartItem } from "@/context/cart-context";
@@ -13,6 +13,20 @@ export default function MedicinesPage() {
   const { t } = useContext(LanguageContext);
   const { toast } = useToast();
   const { addToCart } = useContext(CartContext);
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredMedicines, setFilteredMedicines] = useState(medicines);
+
+  useEffect(() => {
+    const lowercasedQuery = searchQuery.toLowerCase();
+    const filtered = medicines.filter(
+      (medicine) =>
+        medicine.name.toLowerCase().includes(lowercasedQuery) ||
+        medicine.genericName.toLowerCase().includes(lowercasedQuery) ||
+        t(medicine.type).toLowerCase().includes(lowercasedQuery)
+    );
+    setFilteredMedicines(filtered);
+  }, [searchQuery, t]);
 
   const handleAddToCart = (medicine: CartItem) => {
     addToCart(medicine);
@@ -34,11 +48,16 @@ export default function MedicinesPage() {
       <div className="max-w-xl mx-auto mb-12">
           <div className="relative">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-              <Input placeholder={`${t('searchForMedicines')}...`} className="w-full pl-12 h-12 rounded-full" />
+              <Input 
+                placeholder={`${t('searchForMedicines')}...`} 
+                className="w-full pl-12 h-12 rounded-full" 
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
           </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {medicines.map((medicine) => (
+          {filteredMedicines.map((medicine) => (
           <Card key={medicine.id} className="flex flex-col group overflow-hidden transition-all hover:shadow-xl hover:-translate-y-1">
               <CardHeader>
               <div className="flex justify-between items-start">
