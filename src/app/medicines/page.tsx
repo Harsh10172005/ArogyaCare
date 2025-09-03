@@ -1,5 +1,6 @@
 "use client";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, Suspense } from "react";
+import { useSearchParams } from 'next/navigation';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { medicines } from "@/data/medicines";
@@ -9,13 +10,19 @@ import { LanguageContext } from "@/context/language-context";
 import { useToast } from "@/hooks/use-toast";
 import { CartContext, type CartItem } from "@/context/cart-context";
 
-export default function MedicinesPage() {
+function MedicinesSearch() {
   const { t } = useContext(LanguageContext);
   const { toast } = useToast();
   const { addToCart } = useContext(CartContext);
-
-  const [searchQuery, setSearchQuery] = useState("");
+  const searchParams = useSearchParams();
+  
+  const initialQuery = searchParams.get('q') || "";
+  const [searchQuery, setSearchQuery] = useState(initialQuery);
   const [filteredMedicines, setFilteredMedicines] = useState(medicines);
+
+  useEffect(() => {
+    setSearchQuery(initialQuery);
+  }, [initialQuery]);
 
   useEffect(() => {
     const lowercasedQuery = searchQuery.toLowerCase();
@@ -80,4 +87,12 @@ export default function MedicinesPage() {
       </div>
     </div>
   );
+}
+
+export default function MedicinesPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <MedicinesSearch />
+    </Suspense>
+  )
 }

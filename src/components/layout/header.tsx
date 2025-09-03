@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 import { useState, useContext } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { LanguageContext } from "@/context/language-context";
 import { CartSheet } from "./cart-sheet";
@@ -33,7 +33,9 @@ import { Badge } from "../ui/badge";
 
 export default function Header() {
   const [isSheetOpen, setSheetOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const pathname = usePathname();
+  const router = useRouter();
   const { language, setLanguage, t } = useContext(LanguageContext);
   const { cart } = useContext(CartContext);
 
@@ -44,9 +46,18 @@ export default function Header() {
     { href: "/ai-doctor", labelKey: "aiDoctor", icon: Bot },
   ];
 
+  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/medicines?q=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery('');
+    }
+  };
+
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between px-4 md:px-6">
+      <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-6">
           <Link href="/" className="flex items-center gap-2 text-xl font-bold text-primary p-2">
             <Image src="https://i.postimg.cc/TYGz1K8b/arogya_care.png" alt="ArogyaCare Logo" width={32} height={32} />
@@ -78,10 +89,18 @@ export default function Header() {
         </div>
 
         <div className="hidden md:flex items-center gap-2">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input type="search" placeholder={`${t('search')}...`} className="w-48 pl-10" />
-          </div>
+          <form onSubmit={handleSearchSubmit}>
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input 
+                type="search" 
+                placeholder={`${t('search')}...`} 
+                className="w-48 pl-10" 
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+          </form>
           <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon">
