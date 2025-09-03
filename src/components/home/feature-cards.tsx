@@ -22,6 +22,12 @@ export default function FeatureCards() {
       icon: Hospital,
     },
     {
+      titleKey: "healthCamps",
+      descriptionKey: "campsDesc",
+      href: "/camps",
+      icon: Stethoscope,
+    },
+    {
       titleKey: "dietPlanner",
       descriptionKey: "dietPlannerDescShort",
       href: "/diet-planner",
@@ -44,8 +50,8 @@ export default function FeatureCards() {
             {t('ourServicesDesc')}
           </p>
         </div>
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
             {features.map((feature) => (
               <Link href={feature.href} key={feature.titleKey} className="group">
                 <Card className="h-full shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
@@ -54,7 +60,7 @@ export default function FeatureCards() {
                     <feature.icon className="h-8 w-8 text-primary" />
                   </CardHeader>
                   <CardContent>
-                    <p className="text-muted-foreground">{t(feature.descriptionKey)}</p>
+                    <p className="text-muted-foreground text-sm">{t(feature.descriptionKey)}</p>
                     <div className="flex items-center mt-4 font-semibold text-primary group-hover:text-accent-foreground transition-colors">
                       {t('learnMore')} <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform"/>
                     </div>
