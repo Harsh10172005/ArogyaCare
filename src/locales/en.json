@@ -142,5 +142,8 @@
     "quantity": "Quantity",
     "shopNow": "Shop for Medicines",
     "orderPlacedSuccessTitle": "Order Placed!",
-    "orderPlacedSuccessDesc": "Thank you for your purchase. Your order is on its way."
+    "orderPlacedSuccessDesc": "Thank you for your purchase. Your order is on its way.",
+    "phoneNumber": "Phone Number",
+    "phoneNumberPlaceholder": "Enter your 10-digit phone number",
+    "cashOnDelivery": "Cash on Delivery"
 }

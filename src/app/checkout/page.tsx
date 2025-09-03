@@ -14,10 +14,12 @@ import { Separator } from '@/components/ui/separator';
 import { LanguageContext } from '@/context/language-context';
 import { CartContext } from '@/context/cart-context';
 import { useToast } from '@/hooks/use-toast';
-import { ShoppingCart, Truck } from 'lucide-react';
+import { ShoppingCart, Truck, CreditCard } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 
 const formSchema = z.object({
   name: z.string().min(2, 'Name is required'),
+  phone: z.string().length(10, 'Phone number must be 10 digits'),
   address: z.string().min(10, 'Full address is required'),
   pincode: z.string().length(6, 'Pincode must be 6 digits'),
 });
@@ -32,7 +34,7 @@ export default function CheckoutPage() {
 
   const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: { name: '', address: '', pincode: '' },
+    defaultValues: { name: '', phone: '', address: '', pincode: '' },
   });
 
   function onSubmit(values: CheckoutFormValues) {
@@ -70,7 +72,10 @@ export default function CheckoutPage() {
         <div>
           <Card>
             <CardHeader>
-              <CardTitle>{t('shippingDetails')}</CardTitle>
+              <CardTitle className="flex justify-between items-center">
+                <span>{t('shippingDetails')}</span>
+                 <Badge variant="secondary" className="border-green-500/50 text-green-700">{t('cashOnDelivery')}</Badge>
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <Form {...form}>
@@ -83,6 +88,19 @@ export default function CheckoutPage() {
                         <FormLabel>{t('fullName')}</FormLabel>
                         <FormControl>
                           <Input placeholder={t('fullNamePlaceholder')} {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="phone"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{t('phoneNumber')}</FormLabel>
+                        <FormControl>
+                          <Input placeholder={t('phoneNumberPlaceholder')} {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
