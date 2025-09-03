@@ -14,6 +14,7 @@ export async function diagnoseSkin(input: SkinDiagnosisInput): Promise<SkinDiagn
 
 const prompt = ai.definePrompt({
   name: 'skinDiagnosisPrompt',
+  model: 'googleai/gemini-1.5-flash-latest',
   input: { schema: SkinDiagnosisInputSchema },
   output: { schema: SkinDiagnosisOutputSchema },
   prompt: `You are an expert dermatologist AI. A user has provided a photo of a skin condition and an optional description. 
