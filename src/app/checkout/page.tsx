@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,8 +14,9 @@ import { Separator } from '@/components/ui/separator';
 import { LanguageContext } from '@/context/language-context';
 import { CartContext } from '@/context/cart-context';
 import { useToast } from '@/hooks/use-toast';
-import { ShoppingCart, Truck, CreditCard } from 'lucide-react';
+import { ShoppingCart, Truck, CreditCard, Loader2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { placeOrderAction } from './actions';
 
 const formSchema = z.object({
   name: z.string().min(2, 'Name is required'),
@@ -31,20 +32,32 @@ export default function CheckoutPage() {
   const { cart, getTotalPrice, clearCart } = useContext(CartContext);
   const { toast } = useToast();
   const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: { name: '', phone: '', address: '', pincode: '' },
   });
 
-  function onSubmit(values: CheckoutFormValues) {
-    console.log('Order placed with details:', values);
-    toast({
-      title: `${t('orderPlacedSuccessTitle')} ${values.name}!`,
-      description: t('orderPlacedSuccessDesc'),
-    });
-    clearCart();
-    router.push('/');
+  async function onSubmit(values: CheckoutFormValues) {
+    setIsSubmitting(true);
+    const result = await placeOrderAction(values);
+    
+    if (result.success) {
+      toast({
+        title: `${t('orderPlacedSuccessTitle')} ${values.name}!`,
+        description: t('orderPlacedSuccessDesc'),
+      });
+      clearCart();
+      router.push('/');
+    } else {
+       toast({
+        title: t('error'),
+        description: result.error || 'An unknown error occurred.',
+        variant: 'destructive'
+      });
+    }
+    setIsSubmitting(false);
   }
 
   if (cart.length === 0) {
@@ -87,7 +100,7 @@ export default function CheckoutPage() {
                       <FormItem>
                         <FormLabel>{t('fullName')}</FormLabel>
                         <FormControl>
-                          <Input placeholder={t('fullNamePlaceholder')} {...field} />
+                          <Input placeholder={t('fullNamePlaceholder')} {...field} disabled={isSubmitting} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -100,7 +113,7 @@ export default function CheckoutPage() {
                       <FormItem>
                         <FormLabel>{t('phoneNumber')}</FormLabel>
                         <FormControl>
-                          <Input placeholder={t('phoneNumberPlaceholder')} {...field} />
+                          <Input placeholder={t('phoneNumberPlaceholder')} {...field} disabled={isSubmitting}/>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -113,7 +126,7 @@ export default function CheckoutPage() {
                       <FormItem>
                         <FormLabel>{t('shippingAddress')}</FormLabel>
                         <FormControl>
-                          <Input placeholder={t('shippingAddressPlaceholder')} {...field} />
+                          <Input placeholder={t('shippingAddressPlaceholder')} {...field} disabled={isSubmitting}/>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -126,13 +139,14 @@ export default function CheckoutPage() {
                       <FormItem>
                         <FormLabel>{t('pincode')}</FormLabel>
                         <FormControl>
-                          <Input placeholder="e.g., 110001" {...field} />
+                          <Input placeholder="e.g., 110001" {...field} disabled={isSubmitting}/>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-                   <Button type="submit" className="w-full" size="lg">
+                   <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
+                    {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                     {t('placeOrder')} (₹{getTotalPrice().toFixed(2)})
                   </Button>
                 </form>
