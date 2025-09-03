@@ -128,5 +128,19 @@
     "sunday": "Sun",
     "breakfast": "Breakfast",
     "lunch": "Lunch",
-    "dinner": "Dinner"
+    "dinner": "Dinner",
+    "checkoutTitle": "Checkout",
+    "checkoutDesc": "Please confirm your order and shipping details.",
+    "shippingDetails": "Shipping Details",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "Enter your full name",
+    "shippingAddress": "Shipping Address",
+    "shippingAddressPlaceholder": "Enter your full address",
+    "pincode": "Pincode",
+    "placeOrder": "Place Order",
+    "orderSummary": "Order Summary",
+    "quantity": "Quantity",
+    "shopNow": "Shop for Medicines",
+    "orderPlacedSuccessTitle": "Order Placed!",
+    "orderPlacedSuccessDesc": "Thank you for your purchase. Your order is on its way."
 }

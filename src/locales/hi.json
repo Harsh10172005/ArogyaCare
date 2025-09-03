@@ -128,5 +128,19 @@
     "sunday": "रवि",
     "breakfast": "नाश्ता",
     "lunch": "दोपहर का भोजन",
-    "dinner": "रात का खाना"
+    "dinner": "रात का खाना",
+    "checkoutTitle": "चेकआउट",
+    "checkoutDesc": "कृपया अपने ऑर्डर और शिपिंग विवरण की पुष्टि करें।",
+    "shippingDetails": "शिपिंग विवरण",
+    "fullName": "पूरा नाम",
+    "fullNamePlaceholder": "अपना पूरा नाम दर्ज करें",
+    "shippingAddress": "शिपिंग पता",
+    "shippingAddressPlaceholder": "अपना पूरा पता दर्ज करें",
+    "pincode": "पिन कोड",
+    "placeOrder": "ऑर्डर दें",
+    "orderSummary": "ऑर्डर सारांश",
+    "quantity": "मात्रा",
+    "shopNow": "दवाओं की खरीदारी करें",
+    "orderPlacedSuccessTitle": "ऑर्डर दे दिया गया!",
+    "orderPlacedSuccessDesc": "आपकी खरीद के लिए धन्यवाद। आपका ऑर्डर रास्ते में है।"
 }

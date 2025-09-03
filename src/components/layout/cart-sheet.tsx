@@ -9,6 +9,7 @@ import { CartContext } from '@/context/cart-context';
 import { LanguageContext } from '@/context/language-context';
 import { ShoppingCart, Plus, Minus, Trash2 } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export function CartSheet({ children }: { children: React.ReactNode }) {
   const { cart, updateQuantity, removeFromCart, clearCart, getTotalPrice } = useContext(CartContext);
@@ -82,7 +83,11 @@ export function CartSheet({ children }: { children: React.ReactNode }) {
                         <span>{t('total')}</span>
                         <span>₹{getTotalPrice().toFixed(2)}</span>
                     </div>
-                     <Button className="w-full" size="lg">{t('checkout')}</Button>
+                     <SheetTrigger asChild>
+                      <Button asChild className="w-full" size="lg">
+                        <Link href="/checkout">{t('checkout')}</Link>
+                      </Button>
+                    </SheetTrigger>
                      <Button variant="outline" className="w-full" onClick={clearCart}>{t('clearCart')}</Button>
                 </div>
             </SheetFooter>
