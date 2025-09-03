@@ -1,7 +1,7 @@
 export const testimonials = [
   {
     name: "Priya Sharma",
-    location: "Mumbai, India",
+    location: "Saket, New Delhi",
     image: "https://picsum.photos/100/100?random=1",
     testimonial: {
       en: "ArogyaCare has been a lifesaver for my family. The AI doctor gave me quick advice for a minor issue, and ordering medicines is so convenient!",
@@ -10,7 +10,7 @@ export const testimonials = [
   },
   {
     name: "Rajesh Kumar",
-    location: "Delhi, India",
+    location: "Connaught Place, New Delhi",
     image: "https://picsum.photos/100/100?random=2",
     testimonial: {
       en: "Finding a nearby hospital during an emergency was never this easy. The map feature is incredibly accurate and helpful. Highly recommended.",
@@ -19,7 +19,7 @@ export const testimonials = [
   },
   {
     name: "Anjali Mehta",
-    location: "Bangalore, India",
+    location: "Dwarka, New Delhi",
     image: "https://picsum.photos/100/100?random=3",
     testimonial: {
       en: "I love the health camp updates. I was able to register for a free check-up in my area without any hassle. Great initiative!",
@@ -28,7 +28,7 @@ export const testimonials = [
   },
   {
     name: "Sandeep Singh",
-    location: "Pune, India",
+    location: "Karol Bagh, New Delhi",
     image: "https://picsum.photos/100/100?random=4",
     testimonial: {
       en: "The user interface is so clean and easy to navigate. It's a one-stop-shop for all my family's basic healthcare needs.",
@@ -37,7 +37,7 @@ export const testimonials = [
   },
   {
     name: "Fatima Khan",
-    location: "Hyderabad, India",
+    location: "Lajpat Nagar, New Delhi",
     image: "https://picsum.photos/100/100?random=5",
     testimonial: {
       en: "The wellness section is full of practical advice. I've started incorporating some healthy habits into my daily routine thanks to ArogyaCare.",
@@ -46,7 +46,7 @@ export const testimonials = [
   },
   {
     name: "Vikram Reddy",
-    location: "Chennai, India",
+    location: "Vasant Kunj, New Delhi",
     image: "https://picsum.photos/100/100?random=6",
     testimonial: {
       en: "As a senior citizen, the convenience of getting medicines delivered to my doorstep is a huge blessing. The app is very user-friendly.",
