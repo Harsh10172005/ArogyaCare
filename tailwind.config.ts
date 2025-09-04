@@ -89,7 +89,7 @@ export default {
         },
         'beat': {
           '0%, 100%': { transform: 'scale(1)' },
-          '50%': { transform: 'scale(3)' },
+          '50%': { transform: 'scale(2)' },
         },
         'pulse-line-draw': {
           'from': { 'stroke-dashoffset': '1000' },
