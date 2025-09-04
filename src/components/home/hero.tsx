@@ -43,6 +43,8 @@ export default function Hero() {
                         strokeWidth="4"
                         fill="none"
                         strokeLinecap="round"
+                        strokeDasharray="1000"
+                        strokeDashoffset="1000"
                         className="animate-pulse-line-draw"
                     />
                 </svg>
