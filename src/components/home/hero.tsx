@@ -31,7 +31,7 @@ export default function Hero() {
         <div className="relative flex justify-center items-center h-60">
             <div className="absolute inset-0 bg-primary/10 rounded-full blur-3xl"></div>
             <div className="relative w-full h-full flex flex-col items-center justify-center">
-                <Heart className="h-32 w-32 text-primary/80 fill-primary/20 animate-beat" />
+                <Heart className="h-32 w-32 text-primary/80 fill-primary/20" />
                 <svg
                     viewBox="0 0 400 150"
                     className="w-full h-auto"
@@ -43,9 +43,6 @@ export default function Hero() {
                         strokeWidth="4"
                         fill="none"
                         strokeLinecap="round"
-                        strokeDasharray="1000"
-                        strokeDashoffset="1000"
-                        className="animate-pulse-line-draw"
                     />
                 </svg>
             </div>

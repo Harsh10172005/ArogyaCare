@@ -87,24 +87,10 @@ export default {
             height: '0',
           },
         },
-        'beat': {
-          '0%, 100%': { transform: 'scale(1)' },
-          '50%': { transform: 'scale(1.2)' },
-        },
-        'pulse-line-draw': {
-          from: {
-            strokeDashoffset: '1000',
-          },
-          to: {
-            strokeDashoffset: '0',
-          },
-        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'beat': 'beat 1.5s ease-in-out infinite',
-        'pulse-line-draw': 'pulse-line-draw 2s ease-in-out infinite',
       },
     },
   },
