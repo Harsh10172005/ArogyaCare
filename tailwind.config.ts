@@ -89,18 +89,18 @@ export default {
         },
         'beat': {
           '0%, 100%': { transform: 'scale(1)' },
-          '50%': { transform: 'scale(1.2)' },
+          '50%': { transform: 'scale(3)' },
         },
         'pulse-line-draw': {
-          '0%': { strokeDasharray: '0, 1000' },
-          '100%': { strokeDasharray: '1000, 0' },
+          'from': { 'stroke-dashoffset': '1000' },
+          'to': { 'stroke-dashoffset': '0' },
         }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'beat': 'beat 1.5s ease-in-out infinite',
-        'pulse-line-draw': 'pulse-line-draw 2s ease-in-out forwards',
+        'pulse-line-draw': 'pulse-line-draw 3s ease-in-out infinite',
       },
     },
   },
