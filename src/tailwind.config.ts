@@ -92,6 +92,9 @@ export default {
           '50%': { transform: 'scale(1.2)' },
         },
         'pulse-line-draw': {
+          from: {
+            strokeDashoffset: '1000',
+          },
           to: {
             strokeDashoffset: '0',
           },
@@ -101,7 +104,7 @@ export default {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'beat': 'beat 1.5s ease-in-out infinite',
-        'pulse-line-draw': 'pulse-line-draw 2s ease-in-out infinite alternate',
+        'pulse-line-draw': 'pulse-line-draw 2s ease-in-out infinite',
       },
     },
   },
