@@ -1,6 +1,5 @@
 
-// This is a simple in-memory store to simulate a database for orders.
-// In a real application, you would use a proper database like Firestore.
+
 
 interface Order {
   id: string;
@@ -11,8 +10,6 @@ interface Order {
   createdAt: Date;
 }
 
-// Using a global variable to persist data across requests in a dev environment.
-// Note: This will reset when the server restarts.
 const globalForOrders = global as unknown as { orders: Order[] };
 
 if (!globalForOrders.orders) {
@@ -28,12 +25,12 @@ export const OrderService = {
       ...data,
       createdAt: new Date(),
     };
-    orders.unshift(newOrder); // Add to the beginning of the array
+    orders.unshift(newOrder); 
     return newOrder;
   },
 
   async getOrders(): Promise<Order[]> {
-    // Return a copy to prevent direct mutation
+    
     return [...orders];
   },
 };
